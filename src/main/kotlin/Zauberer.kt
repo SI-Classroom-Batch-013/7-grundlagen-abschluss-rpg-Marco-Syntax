@@ -25,7 +25,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action) {
     }
 
     //3 Heiltränke die nur einmal die runde verfügbar sind
-    //Heilt den Zauber um die hälfte seiner Punkte
-    //Gesundheit dauerhaft um 10% verstärken
+    //Heilt  den Zauber um die hälfte seiner Punkte
+    //Gesundheit dauerhaft um 10 % verstärken
 
 }
