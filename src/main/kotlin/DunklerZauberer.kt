@@ -1,13 +1,15 @@
 open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = false) {
 
     fun randomAction(auf: Zauberer) {
-        val aktionList=listOf(
-            feuerSturm(auf),
-            fluchDesTodes(auf),
-            unterbossRufen(),
-            dementorenAttacke(auf),
-            flächenZauber(auf, auf, auf)
-        )
+        val aktionList = listOf(
+            { feuerSturm(auf) },
+            { fluchDesTodes(auf) },
+            { unterbossRufen() },
+            { dementorenAttacke(auf) },
+            { flächenZauber(auf, auf, auf) }
+        ).shuffled()
+        val ersteAktion= aktionList.first()
+        ersteAktion()
     }
 
     fun feuerSturm(ziel: Zauberer) {
