@@ -10,12 +10,16 @@ fun main() {
     var gegner:MutableList<DunklerZauberer> = mutableListOf(lordvoldemord,nagini)
 
 
+
+    lordvoldemord.randomAction(harryPotter)
     harryPotter.angriff(lordvoldemord)
     professorDumbeldor.fawkesAttacke(lordvoldemord)
     harryPotter.vitamine()
     lordvoldemord.feuerSturm(harryPotter)
     lordvoldemord.fluchDesTodes(harryPotter)
     ronWesley.ratteKrätze(lordvoldemord)
+    harryPotter.heilungsmethoden()
+    lordvoldemord.flächenZauber(harryPotter,ronWesley,professorDumbeldor)
 
 
 

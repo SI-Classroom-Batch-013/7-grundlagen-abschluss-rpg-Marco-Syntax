@@ -1,7 +1,8 @@
-open class Zauberer(var name: String, var hp: Int, var action: Action, var schutzZauberAktiv: Boolean = false,
-    var vitaminZugriff: Boolean = true) {
+open class Zauberer(
+    var name: String, var hp: Int, var action: Action, var schutzZauberAktiv: Boolean = false,
+    var vitaminZugriff: Boolean = true, var isDead: Boolean = false) {
 
-    var heiltrankAnwendungen = 3
+
 
     open val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
         "expecto patronum" to 50,
@@ -14,22 +15,27 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
     open fun zauberSpruchAnwenden(): Int? {
         return action.zauberSpruchAnwenden(readln())
     }
-    var zahl=  1
 
+
+    var zahl = 1
     open fun angriff(ziel: DunklerZauberer) {
-        for (i in zaubersprueche){
+        for (i in zaubersprueche) {
             println("$zahl. $i")
-            zahl++}
+            zahl++
+        }
         println("${name} möchte ${ziel.name} angreifen")
-        println()
         println("Bitte gib ein Zauberspruch ein:")
-        // Hier kann man verschiedene Zaubersprüche auswählen über die readline
+        // Hier kann man verschiedene Zaubersprüche auswählen über die Konsole
         val schaden = action.zauberSpruchAnwenden(readln())
         if (schaden != null) {
             ziel.dunklerschadenErhalten(schaden)
+        }else if (hp <= 0 ){
+            isDead = true
+            println("$name kann nicht weiter spielen")
         }
     }
-        fun heilungsmethoden() {
+
+    fun heilungsmethoden() {
         val heilung: Int = 100
         println(
             "$name hat eine Heilungsmethode angewendet und erhält $heilung lebenspunkte Heilung" +
@@ -37,7 +43,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
         )
     }
 
-     fun schutz() {
+    fun schutz() {
         val reduzierterSchaden = zauberSpruchAnwenden()
         if (schutzZauberAktiv) {
             println("$name versucht sich gegen den Angriff zu schützen.")
@@ -48,10 +54,9 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
         println("$name hat sich erfolgreich gegen den Angriff geschützt. Aktuelle HP: $hp")
 
     }
-
+    var heiltrankAnwendungen = 3
     fun beutelTrank() {
         if (heiltrankAnwendungen >= 0) {
-            // Frei wählbar! Einmal in jeder Runde verfügbar
             // Heilt den Zauberer um die Hälfte seiner Lebenspunkte
             val heilung = hp / 2
             hp += heilung
