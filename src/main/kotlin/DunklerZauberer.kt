@@ -1,43 +1,48 @@
-open class DunklerZauberer(var name:String, var hp:Int) {
+open class DunklerZauberer(var name: String, var hp: Int) {
 
-    // sechs methoden
-    //Feueratem
-    //Fluch
-    fun randomAction() {
-        listOf(feuerSturm(),fluchDesTodes(),unterbossRufen(),schutz(),heillung())
+    fun randomAction(auf: Zauberer) {
+        listOf(feuerSturm(auf), fluchDesTodes(auf), unterbossRufen(), schutz(), heillung())
     }
-    fun feuerSturm(){
-        //Soll jeden Zauber Schaden zufügen
+
+    fun feuerSturm(ziel: Zauberer) {
+        var schadenFeuersturm = 100
+        println("Lord Voldemord hat Attacke Feuersturm angewendet schaden: $schadenFeuersturm punkte")
+        ziel.hp -= schadenFeuersturm
     }
-    fun fluchDesTodes(){
-        //Soll eine besonnders starke Attacke sein
+
+    fun fluchDesTodes(ziel: Zauberer) {
+        val fluchDesTodes: Int = 300
+        println("Lord Voldemord hat Attacke Fluch des Todes angewendet schaden: $fluchDesTodes punkte")
+        ziel.hp -= fluchDesTodes
+        println("${ziel.name} hat noch ${ziel.hp} lebenspunkte")
     }
-    fun unterbossRufen(){
+
+    fun unterbossRufen() {
+
         //Soll den unterboss rufen
     }
-    fun schutz(){
+
+    fun schutz() {
         //Schutz vor Attacke
     }
-    fun heillung(){
+
+    fun heillung() {
 
         //Heillung mit dierktem Effekt
     }
-    open fun angriff(ziel: Zauberer) {
-        println("${name} möchte ${ziel.name} angreifen?")
-        println("Bitte gib ein Zauberspruch ein:")
-        // Hier kann man verschiedene Zaubersprüche auswählen über die readline
-        val schaden = feuerSturm()
-        if (schaden != null) {
-             ziel.schadenErhalten(ziel.hp)
-        }
-    }
 
-    open fun schadenErhalten(schaden: Int) {
+    fun dunklerangriff(schaden: Int) {
         hp -= schaden
         if (hp < 0) {
             hp = 0
         }
         println("$name hat $schaden Schaden erhalten. Aktuelle HP: $hp")
     }
+
+    open fun dunklerschadenErhalten(dunklerschaden: Int) {
+        hp -= dunklerschaden
+        println("$name hat $dunklerschaden Schaden erhalten. Aktuelle HP: ${this.hp}")
+    }
+
 
 }
