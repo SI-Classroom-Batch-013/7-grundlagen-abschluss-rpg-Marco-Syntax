@@ -8,6 +8,8 @@ open class DunklerZauberer(var name: String, var hp: Int) {
         var schadenFeuersturm = 100
         println("Lord Voldemord hat Attacke Feuersturm angewendet schaden: $schadenFeuersturm punkte")
         ziel.hp -= schadenFeuersturm
+        println("${ziel.name} hat noch ${ziel.hp} lebenspunkte")
+
     }
 
     fun fluchDesTodes(ziel: Zauberer) {
@@ -23,6 +25,7 @@ open class DunklerZauberer(var name: String, var hp: Int) {
     }
 
     fun schutz() {
+
         //Schutz vor Attacke
     }
 

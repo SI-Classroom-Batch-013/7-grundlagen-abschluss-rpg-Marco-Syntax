@@ -3,7 +3,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
 
     var heiltrankAnwendungen = 3
 
-    val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
+    open val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
         "expecto patronum" to 50,
         "stupor" to 100,
         "expelliarmus" to 150,
@@ -14,10 +14,14 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
     open fun zauberSpruchAnwenden(): Int? {
         return action.zauberSpruchAnwenden(readln())
     }
+    var zahl=  1
 
     open fun angriff(ziel: DunklerZauberer) {
-        println("${name} möchte ${ziel.name} angreifen?")
-        println(zaubersprueche)
+        for (i in zaubersprueche){
+            println("$zahl. $i")
+            zahl++}
+        println("${name} möchte ${ziel.name} angreifen")
+        println()
         println("Bitte gib ein Zauberspruch ein:")
         // Hier kann man verschiedene Zaubersprüche auswählen über die readline
         val schaden = action.zauberSpruchAnwenden(readln())
@@ -25,8 +29,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
             ziel.dunklerschadenErhalten(schaden)
         }
     }
-
-    open fun heilungsmethoden() {
+        fun heilungsmethoden() {
         val heilung: Int = 100
         println(
             "$name hat eine Heilungsmethode angewendet und erhält $heilung lebenspunkte Heilung" +
@@ -34,7 +37,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
         )
     }
 
-    open fun schutz() {
+     fun schutz() {
         val reduzierterSchaden = zauberSpruchAnwenden()
         if (schutzZauberAktiv) {
             println("$name versucht sich gegen den Angriff zu schützen.")
@@ -62,7 +65,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
     fun vitamine() {
         if (vitaminZugriff) {
             val erhöhung = hp / 100 * 10
-            println("$name hat Vitamine genommen. Seine Energie wird dauerhaft um 10% erhöht.")
+            println("$name hat Vitamine genommen. Seine Energie wird  um 10% erhöht.")
             hp += erhöhung
             vitaminZugriff = false
         } else {

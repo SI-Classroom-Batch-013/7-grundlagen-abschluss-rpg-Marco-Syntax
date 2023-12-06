@@ -12,14 +12,10 @@ fun main() {
 
     harryPotter.angriff(lordvoldemord)
     professorDumbeldor.fawkesAttacke(lordvoldemord)
-    harryPotter.beutelTrank()
-    harryPotter.beutelTrank()
-    harryPotter.beutelTrank()
-    harryPotter.beutelTrank()
-
     harryPotter.vitamine()
-    harryPotter.vitamine()
-
+    lordvoldemord.feuerSturm(harryPotter)
+    lordvoldemord.fluchDesTodes(harryPotter)
+    ronWesley.ratteKrätze(lordvoldemord)
 
 
 

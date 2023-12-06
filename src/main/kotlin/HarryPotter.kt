@@ -7,7 +7,7 @@ open class HarryPotter(name: String, hp: Int, action: Action) :  Zauberer(name, 
         println("Bitte gib einen Zauberspruch für den Angriff ein: ")
         val schaden = action.zauberSpruchAnwenden(readln())
         if (schaden != null) {
-            // Hier wird der zusätzliche Schaden gegen das Ziel angewendet
+            // Hier wird der zusätzliche Schaden gegen das Ziel
             ziel.dunklerschadenErhalten(schaden)
         }
     }

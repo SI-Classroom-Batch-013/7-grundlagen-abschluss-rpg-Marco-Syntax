@@ -1,8 +1,8 @@
 open class Action {
-    val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
-        "Reducto" to 50,
+    open val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
+        "expecto patronum" to 50,
         "stupor" to 100,
-        "Accio" to 150,
+        "expelliarmus" to 150,
         "avada kedavra" to 300
     )
 
