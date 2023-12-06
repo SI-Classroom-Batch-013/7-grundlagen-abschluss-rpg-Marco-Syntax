@@ -27,7 +27,6 @@ open class DunklerZauberer(var name: String, var hp: Int) {
     }
 
     fun heillung() {
-
         //Heillung mit dierktem Effekt
     }
 
@@ -38,7 +37,6 @@ open class DunklerZauberer(var name: String, var hp: Int) {
         }
         println("$name hat $schaden Schaden erhalten. Aktuelle HP: $hp")
     }
-
     open fun dunklerschadenErhalten(dunklerschaden: Int) {
         hp -= dunklerschaden
         println("$name hat $dunklerschaden Schaden erhalten. Aktuelle HP: ${this.hp}")
