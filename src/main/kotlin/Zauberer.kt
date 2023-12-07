@@ -21,11 +21,12 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
             zahl++
         }
     }
-
+    // Führt ein Angriff aus
     open fun angriff(ziel: DunklerZauberer) {
         println("$name hat Lebenspunkte $hp und möchte ${ziel.name} angreifen")
         println()
         zauberSpruchListe()
+        println()
         println("Bitte gib ein Zauberspruch ein:")
         // Hier kann man verschiedene Zaubersprüche auswählen über die Konsole
         val schaden = action.zauberSpruchAnwenden(readln())
