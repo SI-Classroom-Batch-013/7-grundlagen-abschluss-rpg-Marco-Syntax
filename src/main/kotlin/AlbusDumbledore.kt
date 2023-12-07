@@ -1,7 +1,7 @@
-open class ProfessorDumbeldor(name: String, hp: Int, action: Action) : Zauberer(name, hp, Action()){
+open class AlbusDumbledore(name: String, hp: Int, action: Action) : Zauberer(name, hp, Action()) {
 
     //Fawkes attacke anwenden
-    fun fawkesAttacke(ziel:DunklerZauberer){
+    fun fawkesAttacke(ziel: DunklerZauberer) {
         println("$name hat sein Phönix FAWKES gerufen und führt seine Attacke Feuerball aus")
         val feuerball: Int = 300
         ziel.hp -= feuerball

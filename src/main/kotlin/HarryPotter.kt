@@ -1,4 +1,4 @@
-open class HarryPotter(name: String, hp: Int, action: Action) :  Zauberer(name, hp, Action()){
+open class HarryPotter(name: String, hp: Int, action: Action) : Zauberer(name, hp, Action()) {
 
     fun fliegen(ziel: DunklerZauberer) {
         println("$name hat seinen Besen gerufen, um den Gegner zu verwirren.")

@@ -8,22 +8,23 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
         "avada kedavra" to 300
     )
 
-//Hilfsfunktion
+    //Hilfsfunktion
     open fun zauberSpruchAnwenden(): Int? {
         return action.zauberSpruchAnwenden(readln())
     }
-//Führt eine Angriff auf den Gegner aus
-    //Gibt die liste mit sprüchen aus
-fun zauberSpruchListe(){
-    var zahl = 1
-    for (i in zaubersprueche) {
-        println("$zahl. $i")
-        zahl++
+
+    //Gibt die Liste mit Zaubersprüchen aus
+    fun zauberSpruchListe() {
+        var zahl = 1
+        for (i in zaubersprueche) {
+            println("$zahl. $i")
+            zahl++
+        }
     }
 
-}
     open fun angriff(ziel: DunklerZauberer) {
         println("$name hat Lebenspunkte $hp und möchte ${ziel.name} angreifen")
+        println()
         zauberSpruchListe()
         println("Bitte gib ein Zauberspruch ein:")
         // Hier kann man verschiedene Zaubersprüche auswählen über die Konsole
@@ -35,15 +36,18 @@ fun zauberSpruchListe(){
             println("$name wurde besiegt")
         }
     }
-//Heilt den Zauber um die hälfte seine Lebenspunkte
+
+    //Heilt den Zauber um die hälfte seine Lebenspunkte
     fun heilungsmethoden() {
         val heilung: Int = 100
+        hp + heilung
         println(
             "$name hat eine Heilungsmethode angewendet und erhält $heilung lebenspunkte Heilung" +
                     " \nDie neuen Lebenspunkte von $name sind  ${heilung + hp}"
         )
     }
-//Gibt dem Zauber Schutz vor der Attacke
+
+    //Gibt dem Zauber Schutz vor der Attacke
     fun schutz() {
         val reduzierterSchaden = zauberSpruchAnwenden()
         if (schutzZauberAktiv) {
@@ -55,7 +59,8 @@ fun zauberSpruchListe(){
         println("$name hat sich erfolgreich gegen den Angriff geschützt. Aktuelle HP: $hp")
 
     }
-//Der Beuteltrank kann nur dreimal verwendet werden
+
+    //Der Beuteltrank kann nur dreimal verwendet werden
     var heiltrankAnwendungen = 3
     fun beutelTrank() {
         if (heiltrankAnwendungen > 0) {
@@ -68,7 +73,8 @@ fun zauberSpruchListe(){
             println("Der Heiltrank kann nicht mehr verwendet werden, er wurde bereits drei Mal eingesetzt.")
         }
     }
-//Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 10%
+
+    //Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 10%
     var vitamine = 1
     fun vitamine() {
         if (vitaminZugriff) {
