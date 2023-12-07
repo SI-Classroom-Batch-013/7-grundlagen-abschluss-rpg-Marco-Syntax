@@ -28,4 +28,6 @@ open class Action {
         return zauberSpruchSchaden
     }
 
+
 }
+
