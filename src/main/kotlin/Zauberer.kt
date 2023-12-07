@@ -23,7 +23,6 @@ fun zauberSpruchListe(){
 
 }
     open fun angriff(ziel: DunklerZauberer) {
-
         println("$name hat Lebenspunkte $hp und möchte ${ziel.name} angreifen")
         zauberSpruchListe()
         println("Bitte gib ein Zauberspruch ein:")
@@ -33,7 +32,7 @@ fun zauberSpruchListe(){
             ziel.dunklerschadenErhalten(schaden)
         } else if (ziel.hp <= 0) {
             ziel.isDead = true
-            println("$name kann nicht weiter spielen")
+            println("$name wurde besiegt")
         }
     }
 //Heilt den Zauber um die hälfte seine Lebenspunkte
