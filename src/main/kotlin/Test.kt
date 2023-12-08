@@ -20,9 +20,10 @@ fun main() {
     // Hauptschleife für das Spiel
     while (!gameOver) {
         println("------Runde:$round------")
-        helden.forEach { println("Dein Team besteht aus ${it.name} Lebenspunkte: ${it.hp}") }
-        println("-------------------------")
-        gegner.forEach { println("Deine Gegner sind ${it.name} Lebenspunkte:${it.hp}") }
+        println("------Dein Team---------")
+        helden.forEach { println("Der Zauber ${it.name} hat Lebenspunkte: ${it.hp}") }
+        println("-------Gegner Team-------")
+        gegner.forEach { println("Dein Gegner ist ${it.name} und hat Lebenspunkte: ${it.hp}") }
         println("-------------------------")
 
         // Jeder Zauberer in der helden-Liste greift an
@@ -62,7 +63,7 @@ fun main() {
             // Nagini führt ein Flächenzauber aus und fügt allen Zauberern Schaden zu
             nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
             naginiBonusAttacke = true
-        } else if (lordVoldemort.hp <= 100) {
+        } else if (lordVoldemort.hp <= 300) {
             // Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt
             println("${lordVoldemort.name} beschwört Nagini. Sie führt eine Attacke aus.")
             nagini.randomAngriff(helden.random())
@@ -79,8 +80,12 @@ fun main() {
             println("Es wird ein zufälliger Zauberer ausgewählt der eine Heilung bekommt ")
             helden.random().beutelTrank()
         }
-
-
+        //Wenn Harry Potter seine Energie unter 100 ruft er seinen Besen und verwirrt sein Gegner und darf nochmal angreifen
+        if (harryPotter.hp <= 200){
+            println("${harryPotter.name} hat unter 100 Lebenspunkte")
+            println("Er darf seine Spezialattacke Fliegen benutzen")
+            harryPotter.fliegen(nagini)
+        }
         // Hier wird das Spielende geprüft
         if ((harryPotter.hp <= 0 && ronWesley.hp <= 0 && albusDumbledore.hp <= 0) || (lordVoldemort.hp <= 0 && nagini.hp <= 0)) {
             gameOver = true
