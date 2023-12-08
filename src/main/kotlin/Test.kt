@@ -28,7 +28,6 @@ fun main() {
         // Jeder Zauberer in der helden-Liste greift an
         for (zauber in helden) {
             println("${zauber.name} startet seinen Angriff")
-
             // Überprüfen, ob der Zauberer noch Lebenspunkte hat
             if (zauber.hp > 0) {
                 // Überprüfen, ob Lord Voldemort als auch Nagini 0 Lebenspunkte haben wenn ja ein breakpoint gesetzt um aus der schleife raus zu kommen
@@ -49,7 +48,7 @@ fun main() {
             }
         }
 
-        // Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen
+        // Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
             println("${lordVoldemort.name} startet seinen Angriff")
             lordVoldemort.randomAngriff(helden.random())
@@ -57,28 +56,30 @@ fun main() {
 
 
         // Wenn Lord Voldemort niedrige HP hat, ruft Nagini zur Hilfe und führt FlächenZauber aus (Bonusattacke)
-        if (lordVoldemort.hp <= 0 && nagini.hp > 0) {
-            println("${lordVoldemort.name} wurde besiegt ${lordVoldemort.hp} Lebenspunkte. Er ruft  Nagini .")
-            println("Nagini macht eine Attacke, und kämpft weiter und führt eine Bonusattacke aus.")
-            //Nagini führt ein Flaechenzauber aus fügt allen Zauber Schaden zu
+        if (lordVoldemort.hp< 150 && nagini.hp > 0) {
+            println("${lordVoldemort.name} seine Lebenspunkte sind sehr schwach ${lordVoldemort.hp} Lebenspunkte. Er ruft Nagini.")
+            println("Nagini macht eine Attacke, und kämpft mit Ihm zusammen und führt eine Bonusattacke aus.")
+            // Nagini führt ein Flächenzauber aus und fügt allen Zauberern Schaden zu
             nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
             naginiBonusAttacke = true
-        }else if (lordVoldemort.hp == 0){
+        } else if (lordVoldemort.hp <= 100) {
+            // Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt
+            println("${lordVoldemort.name} beschwört Nagini. Sie führt eine Attacke aus.")
             nagini.randomAngriff(helden.random())
         }
+
         // Nagini kann nur die Bonusattacke ausführen, wenn Lord Voldemort noch am Leben ist
-        if (naginiBonusAttacke && lordVoldemort.hp > 0) {
-            println("Nagini hat Bonus Attacke ausgeführt")
-            println("${harryPotter.name} darf jetzt seine Spezialattacke ausführen ")
-            harryPotter.fliegen(nagini)
+//        if (naginiBonusAttacke && lordVoldemort.hp > 0) {
+//            println("Nagini hat Bonus Attacke ausgeführt")
+//            println("${harryPotter.name} darf jetzt seine Spezialattacke ausführen ")
+//            harryPotter.fliegen(nagini)
+//        }
+        //Der Beuteltrank wird benutzt und ein random Zauberer ausgesucht, wenn Nagini den Flächenzauber angewendet hat
+        if (naginiBonusAttacke) {
+            println("Es wird ein zufälliger Zauberer ausgewählt der eine Heilung bekommt ")
+            helden.random().beutelTrank()
         }
 
-        //Harry Potter kann nur seine Spezialattacke benutzen, wenn Nagini den Flächenzauber angewendet hat
-        if (naginiBonusAttacke) {
-            println("Nagini hat Bonus Attacke ausgeführt")
-            println("${harryPotter.name} darf jetzt seine Spezialattacke ausführen ")
-            harryPotter.fliegen(nagini)
-        }
 
         // Hier wird das Spielende geprüft
         if ((harryPotter.hp <= 0 && ronWesley.hp <= 0 && albusDumbledore.hp <= 0) || (lordVoldemort.hp <= 0 && nagini.hp <= 0)) {

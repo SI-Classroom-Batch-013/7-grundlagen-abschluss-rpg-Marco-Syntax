@@ -66,7 +66,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
     fun beutelTrank() {
         if (heiltrankAnwendungen > 0) {
             // Heilt den Zauberer um die Hälfte seiner Lebenspunkte
-            val heilung = hp / 2
+            val heilung = 200
             hp += heilung
             println("$name hat einen Heiltrank verwendet und wurde um $heilung Lebenspunkte geheilt.")
             heiltrankAnwendungen--
