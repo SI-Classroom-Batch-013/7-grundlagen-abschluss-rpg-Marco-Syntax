@@ -55,10 +55,9 @@ fun main() {
             lordVoldemort.randomAngriff(helden.random())
         }
 
-
         // Wenn Lord Voldemort niedrige HP hat, ruft er Nagini zur Hilfe und führt FlächenZauber aus (Bonusattacke)
         if (lordVoldemort.hp <= 100 && nagini.hp > 0) {
-            println("${lordVoldemort.name} ruft Nagini.")
+            println("${lordVoldemort.name} ist gestorben und hat Nagini heraufbeschworen.")
             println("Nagini macht eine Attacke, und kämpft für Ihn weiter und führt eine Bonusattacke aus.")
             // Nagini führt ein Flächenzauber aus und fügt allen Zauberern Schaden zu
             nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
@@ -88,7 +87,6 @@ fun main() {
         } else if (lordVoldemort.isDead && nagini.isDead) {
             gameOver = true
         }
-
         round++
     }
 
