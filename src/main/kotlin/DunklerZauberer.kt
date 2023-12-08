@@ -65,9 +65,9 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
     }
 
     //Die Attacke greift alle Zauber an und verursacht schaden
+    //Attacke fügt allen Zauber schaden zu
     fun flächenZauber(ziel1: Zauberer, ziel2: Zauberer, ziel3: Zauberer) {
-        //Attacke fügt allen Zauber schaden zu
-        val flaechenZauber: Int = 200
+        val flaechenZauber: Int = 100
         if (ziel1.hp > 0 || ziel2.hp > 0 || ziel3.hp > 0) {
             println("$name hat Attacke Flächenzauber angewendet. Schaden: $flaechenZauber punkte")
             ziel1.hp -= flaechenZauber
@@ -77,7 +77,7 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
             println("${ziel2.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel2.hp} lebenspunkte")
             println("${ziel3.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel3.hp} lebenspunkte")
         } else if (ziel1.hp == 0 || ziel2.hp == 0 || ziel3.hp == 0) {
-            println("${ziel1.name} ist schon besiegt")
+            println(" Zauber ist schon besiegt")
         }
 
     }
