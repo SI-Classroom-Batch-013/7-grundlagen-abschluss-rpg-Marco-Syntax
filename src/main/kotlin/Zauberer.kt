@@ -1,5 +1,5 @@
 open class Zauberer(var name: String, var hp: Int, var action: Action, var schutzZauberAktiv: Boolean = false,
-    var vitaminZugriff: Boolean = true, var isDead: Boolean = false) {
+    var vitaminZugriff: Boolean = true,var beutelTrank:Boolean=false, var isDead: Boolean = false) {
 //Any erlaubt mir jeden typ zu übergeben
     open val zaubersprueche: MutableMap<String, Any> = mutableMapOf(
         "expecto patronum" to 50,
