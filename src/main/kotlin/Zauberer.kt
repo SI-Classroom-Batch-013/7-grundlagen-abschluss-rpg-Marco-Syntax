@@ -1,11 +1,11 @@
 open class Zauberer(var name: String, var hp: Int, var action: Action, var schutzZauberAktiv: Boolean = false,
     var vitaminZugriff: Boolean = true, var isDead: Boolean = false) {
-
-    open val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
+//Any erlaubt mir jeden typ zu übergeben
+    open val zaubersprueche: MutableMap<String, Any> = mutableMapOf(
         "expecto patronum" to 50,
         "stupor" to 100,
         "expelliarmus" to 150,
-        "avada kedavra" to 300
+        "avada kedavra" to 300,
     )
 
     //Hilfsfunktion
@@ -23,7 +23,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
     }
     // Führt ein Angriff aus
     open fun angriff(ziel: DunklerZauberer) {
-        println("$name hat Lebenspunkte $hp und möchte ${ziel.name} angreifen")
+        println("$name hat $hp Lebenspunkte und möchte ${ziel.name} angreifen er hat ${ziel.hp} Lebenspunkte")
         println()
         zauberSpruchListe()
         println()
@@ -34,7 +34,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
             ziel.dunklerschadenErhalten(schaden)
         } else if (ziel.hp <= 0) {
             ziel.isDead = true
-            println("$name wurde besiegt")
+
         }
     }
 
