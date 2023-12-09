@@ -16,7 +16,19 @@ fun main() {
     var round: Int = 1
     //Bedingung für Bonus Attacke
     var naginiBonusAttacke = false
-
+    println("                                         _ __\n" +
+            "        ___                             | '  \\\n" +
+            "   ___  \\ /  ___         ,'\\_           | .-. \\        /|\n" +
+            "   \\ /  | |,'__ \\  ,'\\_  |   \\          | | | |      ,' |_   /|\n" +
+            " _ | |  | |\\/  \\ \\ |   \\ | |\\_|    _    | |_| |   _ '-. .-',' |_   _\n" +
+            "// | |  | |____| | | |\\_|| |__    //    |     | ,'_`. | | '-. .-',' `. ,'\\_\n" +
+            "\\\\_| |_,' .-, _  | | |   | |\\ \\  //    .| |\\_/ | / \\ || |   | | / |\\  \\|   \\\n" +
+            " `-. .-'| |/ / | | | |   | | \\ \\//     |  |    | | | || |   | | | |_\\ || |\\_|\n" +
+            "   | |  | || \\_| | | |   /_\\  \\ /      | |`    | | | || |   | | | .---'| |\n" +
+            "   | |  | |\\___,_\\ /_\\ _      //       | |     | \\_/ || |   | | | |  /\\| |\n" +
+            "   /_\\  | |           //_____//       .||`      `._,' | |   | | \\ `-' /| |\n" +
+            "        /_\\           `------'        \\ |          `.\\  | |  `._,' /_\\\n" +
+            "                                       \\|     DER MAGISCHE KAMPF           `.\\")
     // Hauptschleife für das Spiel
     while (!gameOver) {
         println("------Runde:$round------")
@@ -45,6 +57,7 @@ fun main() {
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
             println("${lordVoldemort.name} startet seinen Angriff")
+
             lordVoldemort.randomAngriff(helden.random())
         }
 
@@ -75,6 +88,23 @@ fun main() {
 //Wenn Nagini ihre Bonusattacke gemacht hat und Harry Potter noch Lebenspunkte über 0 hat, darf er seine Spezialattacke Fliegen benutzen
         if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp > 0) {
             println("${harryPotter.name} darf jetzt seine Spezialattacke Fliegen benutzen")
+            println("            _            _.,----,\n" +
+                    " __  _.-._ / '-.        -  ,._  \\) \n" +
+                    "|  `-)_   '-.   \\       / < _ )/\" }\n" +
+                    "/__    '-.   \\   '-, ___(c-(6)=(6)\n" +
+                    " , `'.    `._ '.  _,'   >\\    \"  )\n" +
+                    " :;;,,'-._   '---' (  ( \"/`. -='/\n" +
+                    ";:;;:;;,  '..__    ,`-.`)'- '--'\n" +
+                    ";';:;;;;;'-._ /'._|   Y/   _/' \\\n" +
+                    "      '''\"._ F    |  _/ _.'._   `\\\n" +
+                    "             L    \\   \\/     '._  \\\n" +
+                    "      .-,-,_ |     `.  `'---,  \\_ _|\n" +
+                    "      //    'L    /  \\,   (\"--',=`)7\n" +
+                    "     | `._       : _,  \\  /'`-._L,_'-._\n" +
+                    "     '--' '-.\\__/ _L   .`'         './/\n" +
+                    "                 [ (  /\n" +
+                    "                  ) `{\n" +
+                    "       snd        \\__)")
             harryPotter.fliegen(nagini)
             //Wenn Harry potter tot ist darf Ron dafür seine Spezialattcke ausführen
         } else if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp < 0) {
@@ -92,7 +122,7 @@ fun main() {
         } else if (harryPotter.hp <= 0 && ronWesley.hp <= 0 && albusDumbledore.hp <= 0) {
             gameOver = true
             println("Das Team der Dunkeln Magie hat gewonnen!")
-        } else if (lordVoldemort.isDead || nagini.isDead) {
+        } else if (lordVoldemort.isDead && nagini.isDead) {
             println("Das Team der Zauberer hat gewonnen!")
             gameOver= true
         }
