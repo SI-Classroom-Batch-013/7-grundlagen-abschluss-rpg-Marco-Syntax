@@ -1,7 +1,7 @@
 open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = false) {
     //Ist eine Methode die eine Random Attacke ausführt
     fun randomAngriff(auf: Zauberer) {
-        if (auf.hp>0){
+        if (auf.hp > 0) {
             val angriffListe = listOf(
                 { feuerSturm(auf) },
                 { fluchDesTodes(auf) },
@@ -9,22 +9,21 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
             )
             val randomAttacke = angriffListe.random()
             randomAttacke()
-        }else if (auf.hp==0){
+        } else if (auf.hp == 0) {
             println("${auf.name} wurde besiegt")
         }
-
 
 
     }
 
     //Eine Attacke die Schaden verursacht
     fun feuerSturm(ziel: Zauberer) {
-        val schadenFeuersturm = 100
-        if (ziel.hp>0){
+        val schadenFeuersturm = 150
+        if (ziel.hp > 0) {
             println("$name hat Attacke Feuersturm gegen ${ziel.name} angewendet. Schaden: $schadenFeuersturm punkte")
             ziel.hp -= schadenFeuersturm
             println("${ziel.name} hat noch ${ziel.hp} lebenspunkte")
-        } else if (ziel.hp==0){
+        } else if (ziel.hp == 0) {
             println("${ziel.name} wurde besiegt")
         }
     }
@@ -54,12 +53,12 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
 
     //Eine Attacke die schaden verursacht
     fun dementorenAttacke(ziel: Zauberer) {
-        val dementorAttacke: Int = 200
+        val dementorAttacke: Int = 150
         if (ziel.hp > 0) {
             println("$name hat Attacke Dementorenattacke gegen ${ziel.name} angewendet. Schaden: $dementorAttacke punkte")
             ziel.hp -= dementorAttacke
             println("${ziel.name} hat noch ${ziel.hp} lebenspunkte")
-        } else if (ziel.hp==0) {
+        } else if (ziel.hp == 0) {
             println("${ziel.name} wurde besiegt")
         }
     }

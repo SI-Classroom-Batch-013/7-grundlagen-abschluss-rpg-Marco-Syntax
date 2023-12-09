@@ -1,8 +1,8 @@
 fun main() {
     // Zauberer und Gegner erstellt
-    val harryPotter: HarryPotter = HarryPotter("Harry Potter", 400, Action())
-    val ronWesley: RonWesley = RonWesley("Ron Wesley", 400, Action())
-    val albusDumbledore: AlbusDumbledore = AlbusDumbledore("Albus Dumbledore", 400, Action())
+    val harryPotter: HarryPotter = HarryPotter("Harry Potter", 300, Action())
+    val ronWesley: RonWesley = RonWesley("Ron Wesley", 300, Action())
+    val albusDumbledore: AlbusDumbledore = AlbusDumbledore("Albus Dumbledore", 300, Action())
 
     val lordVoldemort: LordVoldemort = LordVoldemort("Lord Voldemort", 600)
     val nagini: Nagini = Nagini("Nagini", 300)
@@ -25,7 +25,6 @@ fun main() {
         println("-------Gegner Team-------")
         gegner.forEach { println("Dein Gegner ist ${it.name} und hat Lebenspunkte: ${it.hp}") }
         println("-------------------------")
-
 // Jeder Zauberer in der helden-Liste greift an
         for (zauber in helden) {
             println("${zauber.name} startet seinen Angriff")
@@ -49,22 +48,22 @@ fun main() {
             lordVoldemort.randomAngriff(helden.random())
         }
 
-//Wenn Lord Voldemort gestorben ist, ruft er Nagini zur Hilfe und führt FlächenZauber aus (Bonusattacke) die sie einmal ausführt
+//Wenn Lord Voldemort gestorben ist, ruft er Nagini zur Hilfe und Nagini führt FlächenZauber aus (Bonusattacke) aus die sie einmal ausführt
         if (lordVoldemort.hp <= 0 && nagini.hp > 0 && !naginiBonusAttacke) {
             lordVoldemort.isDead = true
-            println("${lordVoldemort.name} ist gestorben und hat Nagini heraufbeschworen.")
-            println("Nagini macht eine Attacke, und kämpft für Ihn weiter und führt eine Bonusattacke aus.")
+            println("${lordVoldemort.name} ist gestorben und hat Nagini herbeigerufen.")
+            println("Nagini taucht auf  führt eine Bonusattacke (Flächenzauber) aus die alle Zauber verletzt.")
 //Nagini führt ein Flächenzauber aus und fügt allen Zauberern Schaden zu
             nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
             naginiBonusAttacke = true
+//Zusatz Attacke für voldemort
         } else if (lordVoldemort.hp <= 300) {
-//Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und unter 300 hp ist
-            println("${lordVoldemort.name} beschwört Nagini. Sie führt eine zufällige Attacke aus.")
-            nagini.randomAngriff(helden.random())
+//Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und unter 300 hp ist als
+            println("${lordVoldemort.name} wurde schwer Verletzt und  ruft Nagini. Sie beißt zu.")
+            nagini.schlagenBiss(helden.random())
         }
-
-//Wenn die hp unter 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben der darf nur einmal pro runde benutzt werden
-        if (harryPotter.hp <= 200 || ronWesley.hp <= 200 || albusDumbledore.hp <= 200) {
+//Wenn die hp unter 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben der darf nur einmal pro runde benutzt werden und wenn zauber tot ist kann vielleicht der Zaubertrank ihn wiederbeleben
+        if (harryPotter.hp < 200 || ronWesley.hp < 200 || albusDumbledore.hp < 200) {
             // Der Beuteltrank wird benutzt und ein zufälliger Zauberer ausgesucht
             println("Es wird ein zufälliger Zauberer ausgewählt der eine Heilung bekommt ")
             helden.random().beutelTrank()
@@ -83,21 +82,22 @@ fun main() {
             ronWesley.ratteKrätze(nagini)
             //Wenn Ron Wesley tot ist darf Albus Dumbeldore sein Phönix rufen
         } else if (naginiBonusAttacke && nagini.hp > 0 && ronWesley.hp < 0) {
-            println("Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
+            println("Albus Dumbeldore darf seine Spezialattacke anwenden und ruf seinen Phönix Fakes")
             albusDumbledore.fawkesAttacke(nagini)
         }
 // Hier wird das Spielende geprüft
         if (lordVoldemort.hp <= 0 && nagini.hp <= 0) {
             gameOver = true
-            println("Das Team der Zauberer hat gewonnen!")
-
+            println("Die Zauberer haben gewonnen!")
         } else if (harryPotter.hp <= 0 && ronWesley.hp <= 0 && albusDumbledore.hp <= 0) {
             gameOver = true
-            println("Das Team der Dunkeler Zauber hat gewonnen!")
+            println("Das Team der Dunkeln Magie hat gewonnen!")
         } else if (lordVoldemort.isDead || nagini.isDead) {
             println("Das Team der Zauberer hat gewonnen!")
+            gameOver= true
         }
         round++
+
     }
     // Spielende ausgeben
     println("Game Over")
