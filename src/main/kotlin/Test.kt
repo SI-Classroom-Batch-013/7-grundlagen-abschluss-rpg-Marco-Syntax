@@ -72,7 +72,7 @@ fun main() {
             nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
             naginiBonusAttacke = true
 //Zusatz Attacke für voldemort
-        } else if (lordVoldemort.hp <= 300) {
+        } else if (lordVoldemort.hp == 300) {
 //Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und unter 300 hp ist als zusatzattacke
             println("${lordVoldemort.name} wurde schwer Verletzt und  ruft Nagini. Sie beißt zu.")
             nagini.schlagenBiss(helden.random())
@@ -110,7 +110,7 @@ fun main() {
             )
             harryPotter.fliegen(nagini)
             //Wenn Harry potter tot ist darf Ron dafür seine Spezialattcke ausführen
-        } else if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp < 0) {
+        } else if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp <= 0) {
             println("Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
             ronWesley.ratteKrätze(nagini)
             //Wenn Ron Wesley tot ist darf Albus Dumbeldore sein Phönix rufen
@@ -134,8 +134,8 @@ fun main() {
             break
         }
         round++
-
     }
     // Spielende ausgeben
+
     println("ENDE")
 }
