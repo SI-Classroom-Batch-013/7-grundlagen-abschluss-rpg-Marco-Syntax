@@ -13,7 +13,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
         return action.zauberSpruchAnwenden(readln())
     }
 
-    //Gibt die Liste mit Zaubersprüchen aus
+    //Gibt die Liste mit Zaubersprüchen aus mit einer for i schleife
     fun zauberSpruchListe() {
         var zahl = 1
         for (i in zaubersprueche) {

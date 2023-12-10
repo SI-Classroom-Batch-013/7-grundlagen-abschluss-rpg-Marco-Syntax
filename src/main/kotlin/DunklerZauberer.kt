@@ -9,11 +9,7 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
             )
             val randomAttacke = angriffListe.random()
             randomAttacke()
-        } else if (auf.hp == 0) {
-            println("${auf.name} wurde besiegt")
         }
-
-
     }
 
     //Eine Attacke die Schaden verursacht
@@ -23,8 +19,6 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
             println("$name hat Attacke Feuersturm gegen ${ziel.name} angewendet. Schaden: $schadenFeuersturm punkte")
             ziel.hp -= schadenFeuersturm
             println("${ziel.name} hat noch ${ziel.hp} lebenspunkte")
-        } else if (ziel.hp == 0) {
-            println("${ziel.name} wurde besiegt")
         }
     }
 
@@ -35,10 +29,7 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
             println("$name hat Attacke Fluch des Todes gegen ${ziel.name} angewendet. Schaden: $fluchDesTodes punkte")
             ziel.hp -= fluchDesTodes
             println("${ziel.name} hat noch ${ziel.hp} lebenspunkte")
-        } else {
-            println("${ziel.name} wurde besiegt")
         }
-
     }
 
     //Ist eine Methode die kann erst verwendet werden wenn die Lenbenspunkte unter 100 sind
@@ -58,8 +49,6 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
             println("$name hat Attacke Dementorenattacke gegen ${ziel.name} angewendet. Schaden: $dementorAttacke punkte")
             ziel.hp -= dementorAttacke
             println("${ziel.name} hat noch ${ziel.hp} lebenspunkte")
-        } else if (ziel.hp == 0) {
-            println("${ziel.name} wurde besiegt")
         }
     }
 
