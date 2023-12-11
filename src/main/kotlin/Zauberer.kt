@@ -2,10 +2,10 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
     var vitaminZugriff: Boolean = true,var beutelTrank:Boolean=false, var isDead: Boolean = false) {
 //Any erlaubt mir jeden typ zu übergeben
     open val zaubersprueche: MutableMap<String, Any> = mutableMapOf(
-        "expecto patronum " to  50,
-        "stupor " to  100,
-        "expelliarmus " to  150,
-        "avada kedavra " to  300,
+        "expecto patronum" to  50,
+        "stupor" to  100,
+        "expelliarmus" to  150,
+        "avada kedavra" to  300,
     )
 
     //Hilfsfunktion
@@ -50,10 +50,12 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
 
     //Gibt dem Zauber Schutz vor der Attacke
     fun schutz() {
-        val reduzierterSchaden = 100
+        val reduzierterSchaden = zauberSpruchAnwenden()
         if (schutzZauberAktiv) {
-            println("$name hat sich gegen den Angriff geschützt.")
-            hp -= reduzierterSchaden
+            println("$name versucht sich gegen den Angriff zu schützen.")
+            if (reduzierterSchaden != null) {
+                hp -= reduzierterSchaden
+            }
         }
         println("$name hat sich erfolgreich gegen den Angriff geschützt. Aktuelle HP: $hp")
 
@@ -73,17 +75,17 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
         }
     }
 
-    //Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 20%
+    //Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 10%
     var vitamine = 1
     fun vitamine() {
         if (vitaminZugriff) {
-            val erhöhung = (hp / 100) * 20
-            println("$name hat den Zauber bekommen. Seine Energie wird um 20% erhöht.")
+            val erhöhung = (hp / 100) * 10
+            println("$name hat Vitamine genommen. Seine Energie wird  um 10% erhöht.")
             hp += erhöhung
             vitamine--
             vitaminZugriff = false
         } else {
-            println("$name hat keinen Zugriff mehr auf den Zauber.")
+            println("$name hat keinen Zugriff mehr auf die Vitamine in dieser Runde.")
         }
     }
 

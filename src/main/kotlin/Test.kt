@@ -63,8 +63,14 @@ fun main() {
             if (zauber.hp > 0) {
 // Wenn Lord Voldemort besiegt wurde, dann Nagini angreifen
                 if (lordVoldemort.hp == 0 && nagini.hp > 0) {
-                    println("${nagini.name} wird jetzt angegriffen$reset")
+                    println("${nagini.name} wird jetzt angegriffen")
                     zauber.angriff(nagini)
+                    nagini.isDead
+                    if (lordVoldemort.isDead && nagini.isDead) {
+                        println("Die Zauberer haben gewonnen!")
+                        gameOver = true
+                        break
+                    }
                 } else {
                     zauber.angriff(lordVoldemort)
                 }
@@ -72,11 +78,18 @@ fun main() {
                 println("${zauber.name} hat 0 Lebenspunkte und kann nicht angreifen.")
             }
         }
-
+        //soll Zauber aus der liste helden entfernen
+//        if (harryPotter.hp == 0 || ronWesley.hp == 0 || albusDumbledore.hp == 0) {
+//            helden.remove(harryPotter)
+//            helden.remove(ronWesley)
+//            helden.remove(albusDumbledore)
+//            break
+//        }
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
             println("${lordVoldemort.name} startet seinen Angriff")
             lordVoldemort.randomAngriff(helden.random())
+
         }
 
 //Wenn Lord Voldemort gestorben ist, ruft er Nagini zur Hilfe und Nagini führt FlächenZauber aus (Bonusattacke) aus die sie einmal ausführt
@@ -100,7 +113,6 @@ fun main() {
         }
         //Wenn der Schlagenbiss true ist, dann wird ein Magischer zauber aufgerufen ein zufälliger Zauberer bekommt einmalig die vitamine und die hp wird um 20 % erhöht
         if (naginiSchlangenBiss) {
-            println("Ein wird ein Magischer zauber beschworen der einem Zauber 20% mehr energie gibt ")
             helden.random().vitamine()
             harryPotter.vitaminZugriff = false
             ronWesley.vitaminZugriff = false
@@ -146,7 +158,7 @@ fun main() {
             println()
             println("Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
             println(
-                "    /m'\n" +
+                "      /m'\n" +
                         "      (oo\\\n" +
                         "      / ._)\n" +
                         "     J _=\\=\n" +
@@ -182,7 +194,7 @@ fun main() {
 
         //hier wird das spielende geprüft
         if (lordVoldemort.hp <= 0 && nagini.hp <= 0) {
-            println("Die Zauberer haben gewonnen!")
+            println("Die Zauberer haben gewonnen ")
             gameOver = true
             break
         } else if (harryPotter.hp <= 0 && ronWesley.hp <= 0 && albusDumbledore.hp <= 0) {
