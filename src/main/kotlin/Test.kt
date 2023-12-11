@@ -44,6 +44,8 @@ fun main() {
                 "        /_\\           `------'        \\ |          `.\\  | |  `._,' /_\\\n" +
                 "                                       \\|     DER MAGISCHE KAMPF           `.\\$reset"
     )
+    println()
+    println("      ----Der Kampf Beginnt----")
     // Hauptschleife für das Spiel
     while (!gameOver) {
         println("         ----Runde:$round----")
@@ -53,9 +55,6 @@ fun main() {
         println()
         println("$yellow------Gegner Team-----$reset")
         gegner.forEach { println("$yellow Dein Gegner ist ${it.name} und hat Lebenspunkte: ${it.hp}$reset") }
-        println()
-        println("      ----Der Kampf Beginnt----")
-        println()
 
 // Jeder Zauberer in der helden-Liste greift an
         for (zauber in helden) {
@@ -66,6 +65,8 @@ fun main() {
                 if (lordVoldemort.hp == 0 && nagini.hp > 0) {
                     println("${nagini.name} wird jetzt angegriffen$reset")
                     zauber.angriff(nagini)
+                    nagini.isDead = true
+
                 } else {
                     zauber.angriff(lordVoldemort)
                 }
@@ -78,7 +79,7 @@ fun main() {
         if (lordVoldemort.hp > 0) {
             println("${lordVoldemort.name} startet seinen Angriff")
             lordVoldemort.randomAngriff(helden.random())
-        }
+        }  else lordVoldemort.isDead = true
 
 //Wenn Lord Voldemort gestorben ist, ruft er Nagini zur Hilfe und Nagini führt FlächenZauber aus (Bonusattacke) aus die sie einmal ausführt
         if (lordVoldemort.hp <= 0 && !naginiBonusAttacke) {
@@ -90,19 +91,23 @@ fun main() {
             nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
             println()
             naginiBonusAttacke = true
-//Zusatz Attacke für voldemort
+//Zusatz Attacke für voldemort wenn hp 300 sind
         } else if (lordVoldemort.hp == 300) {
-//Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und unter 300 hp ist als zusatzattacke
+//Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und 300 hp ist als zusatzattacke
             println()
             println("${lordVoldemort.name} wurde schwer Verletzt und  ruft Nagini. Sie beißt zu.")
             nagini.schlagenBiss(helden.random())
-            naginiSchlangenBiss=true
+            naginiSchlangenBiss = true
             println()
         }
-        //Wenn der Schlagenbiss true ist dann wird ein Zauber aufgerufen ein zufälliger Zauberer bekommt einmalig die vitamine und die hp wird um 10% erhöht
-        if (naginiSchlangenBiss){
-            println("Ein wird ein Zauber beschworen der einem Zauber 10% mehr energie gibt ")
+        //Wenn der Schlagenbiss true ist, dann wird ein Magischer zauber aufgerufen ein zufälliger Zauberer bekommt einmalig die vitamine und die hp wird um 20 % erhöht
+        if (naginiSchlangenBiss) {
+            println("Ein wird ein Magischer zauber beschworen der einem Zauber 20% mehr energie gibt ")
             helden.random().vitamine()
+            harryPotter.vitaminZugriff = false
+            ronWesley.vitaminZugriff = false
+            albusDumbledore.vitaminZugriff = false
+
         }
 //Wenn die hp unter 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben der darf nur einmal pro runde benutzt werden und wenn zauber tot ist kann vielleicht der Zaubertrank ihn wiederbeleben
         if (harryPotter.hp <= 200 || ronWesley.hp <= 200 || albusDumbledore.hp <= 200) {
@@ -114,8 +119,8 @@ fun main() {
             ronWesley.beutelTrank = true
             albusDumbledore.beutelTrank = true
         }
-//Wenn Nagini ihre Bonusattacke gemacht hat und Harry Potter noch Lebenspunkte über 0 hat, darf er seine Spezialattacke Fliegen benutzen
-        if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp >= 0) {
+//Wenn Nagini ihre Bonusattacke gemacht hat und Harry Potter hp größer 300 sind, darf er seine Spezialattacke ausführen
+        if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp > 300) {
             println("${harryPotter.name} darf jetzt seine Spezialattacke Fliegen benutzen")
             println(
                 "            _            _.,----,\n" +
@@ -138,21 +143,23 @@ fun main() {
             )
             harryPotter.fliegen(nagini)
             println()
-            //Wenn Harry potter tot ist darf Ron dafür seine Spezialattcke ausführen
-        } else if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp < 0) {
+            //Wenn Harry Potter seine hp kleiner 300 darf Ron Wesley seine Spezialattacke ausführen
+        } else if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp < 300) {
             println()
             println("Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
-            println("    /m'\n" +
-                    "      (oo\\\n" +
-                    "      / ._)\n" +
-                    "     J _=\\=\n" +
-                    "     |   /\n" +
-                    "3._.' |_+_")
+            println(
+                "    /m'\n" +
+                        "      (oo\\\n" +
+                        "      / ._)\n" +
+                        "     J _=\\=\n" +
+                        "     |   /\n" +
+                        "3._.' |_+_"
+            )
             ronWesley.ratteKrätze(nagini)
-            //Wenn Ron Wesley tot ist darf Albus Dumbeldore sein Phönix rufen
-        } else if (naginiBonusAttacke && nagini.hp >= 0 && ronWesley.hp <= 0) {
+            //Wenn Ron Wesley hp kleiner als 200 sind und Harry seine hp kleiner als 200 sind darf Albus Dumbledore seine Spezialattacke ausführen
+        } else if (naginiBonusAttacke && nagini.hp >= 0 && harryPotter.hp < 200 && ronWesley.hp < 200) {
             println()
-            println("Albus Dumbeldore darf seine Spezialattacke anwenden und ruf seinen Phönix Fakes")
+            println("Albus Dumbledore darf seine Spezialattacke anwenden und ruf seinen Phönix Fakes")
             albusDumbledore.fawkesAttacke(nagini)
         }
 
@@ -167,7 +174,7 @@ fun main() {
             break
         } else if (lordVoldemort.isDead && nagini.isDead) {
             println("Das Team der Zauberer hat gewonnen!")
-            gameOver= true
+            gameOver = true
             break
         }
         round++

@@ -73,12 +73,12 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
         }
     }
 
-    //Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 10%
+    //Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 20%
     var vitamine = 1
     fun vitamine() {
         if (vitaminZugriff) {
-            val erhöhung = (hp / 100) * 10
-            println("$name hat den Zauber bekommen. Seine Energie wird um 10% erhöht.")
+            val erhöhung = (hp / 100) * 20
+            println("$name hat den Zauber bekommen. Seine Energie wird um 20% erhöht.")
             hp += erhöhung
             vitamine--
             vitaminZugriff = false

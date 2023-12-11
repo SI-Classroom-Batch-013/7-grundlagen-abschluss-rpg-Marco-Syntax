@@ -5,7 +5,7 @@ open class Action {
         "expelliarmus" to  150,
         "avada kedavra" to  300
     )
-
+//Hier wird der Schaden von der map genommen man gibt den key ein und bekommt den Value wert als zauberSpruch schaden
     open fun zauberSpruchAnwenden(zauberSpruchName: String): Int? {
         var zauberSpruchSchaden = zaubersprueche[zauberSpruchName]
         var versuche = 1
