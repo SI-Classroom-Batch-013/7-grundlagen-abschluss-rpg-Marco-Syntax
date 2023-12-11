@@ -75,7 +75,7 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
         hp -= dunklerschaden
         if (hp <= 0) {
             hp = 0
-            println("$name wurde besiegt ")
+            println("${this.name} wurde besiegt ")
         } else {
             println("$name hat $dunklerschaden Schaden erhalten. Aktuelle HP: $hp")
         }

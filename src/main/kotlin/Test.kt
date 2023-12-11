@@ -9,7 +9,7 @@ fun main() {
 
     var helden: MutableList<Zauberer> = mutableListOf(harryPotter, ronWesley, albusDumbledore)
     var gegner: MutableList<DunklerZauberer> = mutableListOf(lordVoldemort, nagini)
-
+    val red="\u001B[31m"
     val green = "\u001B[32m"
     val yellow = "\u001B[33m"
     val blue = "\u001B[34m"
@@ -66,10 +66,13 @@ fun main() {
                     println("${nagini.name} wird jetzt angegriffen")
                     zauber.angriff(nagini)
                     nagini.isDead
+
                     if (lordVoldemort.isDead && nagini.isDead) {
                         println("Die Zauberer haben gewonnen!")
                         gameOver = true
                         break
+                    }else if (nagini.hp==0){
+                        gameOver = true
                     }
                 } else {
                     zauber.angriff(lordVoldemort)
@@ -96,7 +99,7 @@ fun main() {
             nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
             println()
             naginiBonusAttacke = true
-//Zusatz Attacke für voldemort wenn hp 300 sind
+//Zusatz Attacke für voldemort, wenn hp 300 sind
         } else if (lordVoldemort.hp == 300) {
 //Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und 300 hp ist als zusatzattacke
             println()
@@ -124,7 +127,7 @@ fun main() {
             albusDumbledore.beutelTrank = true
         }
 //Wenn Nagini ihre Bonusattacke gemacht (true) hat und Ron Wesley seine hp kleiner 200 und Albus Dumbeldore seine hp kleiner 200 sind, darf Harry Potter seine Spezialattacke ausführen
-        if (naginiBonusAttacke && nagini.hp > 0 && ronWesley.hp < 200 && albusDumbledore.hp < 200) {
+        if (naginiBonusAttacke && nagini.hp > 0 && ronWesley.hp < 500 && albusDumbledore.hp < 500) {
             println("${harryPotter.name} darf jetzt seine Spezialattacke Fliegen benutzen")
             println(
                 "            _            _.,----,\n" +
@@ -148,7 +151,7 @@ fun main() {
             harryPotter.fliegen(nagini)
             println()
             //Wenn Harry Potter seine hp kleiner 200 und Albus Dumbledore hp kleiner 200 sind, darf Ron Wesley seine Spezialattacke ausführen
-        } else if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp < 200 && albusDumbledore.hp < 200) {
+        } else if (naginiBonusAttacke && nagini.hp >= 0 && harryPotter.hp < 500 && albusDumbledore.hp < 500) {
             println()
             println("Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
             println(
