@@ -78,20 +78,14 @@ fun main() {
                 println("${zauber.name} hat 0 Lebenspunkte und kann nicht angreifen.")
             }
         }
-        //soll Zauber aus der liste helden entfernen
-//        if (harryPotter.hp == 0 || ronWesley.hp == 0 || albusDumbledore.hp == 0) {
-//            helden.remove(harryPotter)
-//            helden.remove(ronWesley)
-//            helden.remove(albusDumbledore)
-//            break
-//        }
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
             println("${lordVoldemort.name} startet seinen Angriff")
             lordVoldemort.randomAngriff(helden.random())
-
+// Wenn Lord Voldemort keine hp mehr hat, dann greift nagini an
+        }else if (lordVoldemort.hp==0){
+            nagini.randomAngriff(helden.random())
         }
-
 //Wenn Lord Voldemort gestorben ist, ruft er Nagini zur Hilfe und Nagini führt FlächenZauber aus (Bonusattacke) aus die sie einmal ausführt
         if (lordVoldemort.hp <= 0 && !naginiBonusAttacke) {
             lordVoldemort.isDead = true
