@@ -1,9 +1,9 @@
 open class Action {
     open val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
-        "expecto patronum" to 50,
-        "stupor" to 100,
-        "expelliarmus" to 150,
-        "avada kedavra" to 300
+        "expecto patronum" to  50,
+        "stupor" to  100,
+        "expelliarmus" to  150,
+        "avada kedavra" to  300
     )
 
     open fun zauberSpruchAnwenden(zauberSpruchName: String): Int? {

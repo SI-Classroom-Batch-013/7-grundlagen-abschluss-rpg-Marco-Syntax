@@ -2,10 +2,10 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
     var vitaminZugriff: Boolean = true,var beutelTrank:Boolean=false, var isDead: Boolean = false) {
 //Any erlaubt mir jeden typ zu übergeben
     open val zaubersprueche: MutableMap<String, Any> = mutableMapOf(
-        "expecto patronum" to 50,
-        "stupor" to 100,
-        "expelliarmus" to 150,
-        "avada kedavra" to 300,
+        "expecto patronum " to  50,
+        "stupor " to  100,
+        "expelliarmus " to  150,
+        "avada kedavra " to  300,
     )
 
     //Hilfsfunktion
@@ -40,22 +40,20 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
 
     //Heilt den Zauber um die hälfte seine Lebenspunkte
     fun heilungsmethoden() {
-        val heilung: Int = 100
+        val heilung: Int = hp/2
         hp + heilung
         println(
             "$name hat eine Heilungsmethode angewendet und erhält $heilung lebenspunkte Heilung" +
-                    " \nDie neuen Lebenspunkte von $name sind  ${heilung + hp}"
+                    " \nDie neuen Lebenspunkte von $name sind  $hp"
         )
     }
 
     //Gibt dem Zauber Schutz vor der Attacke
     fun schutz() {
-        val reduzierterSchaden = zauberSpruchAnwenden()
+        val reduzierterSchaden = 100
         if (schutzZauberAktiv) {
-            println("$name versucht sich gegen den Angriff zu schützen.")
-            if (reduzierterSchaden != null) {
-                hp -= reduzierterSchaden
-            }
+            println("$name hat sich gegen den Angriff geschützt.")
+            hp -= reduzierterSchaden
         }
         println("$name hat sich erfolgreich gegen den Angriff geschützt. Aktuelle HP: $hp")
 
@@ -80,12 +78,12 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
     fun vitamine() {
         if (vitaminZugriff) {
             val erhöhung = (hp / 100) * 10
-            println("$name hat Vitamine genommen. Seine Energie wird  um 10% erhöht.")
+            println("$name hat den Zauber bekommen. Seine Energie wird um 10% erhöht.")
             hp += erhöhung
             vitamine--
             vitaminZugriff = false
         } else {
-            println("$name hat keinen Zugriff mehr auf die Vitamine in dieser Runde.")
+            println("$name hat keinen Zugriff auf den Zauber.")
         }
     }
 

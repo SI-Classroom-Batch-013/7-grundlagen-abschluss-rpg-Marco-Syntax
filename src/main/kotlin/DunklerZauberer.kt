@@ -32,7 +32,7 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
         }
     }
 
-    //Ist eine Methode die kann erst verwendet werden wenn die Lenbenspunkte unter 100 sind
+    //Ist eine Methode
     fun unterbossRufen() {
         if (hp <= 100) {
             println("Nagini kämpft nun an deiner Seite")
@@ -55,7 +55,7 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
     //Die Attacke greift alle Zauber an und verursacht schaden
     //Attacke fügt allen Zauber schaden zu
     fun flächenZauber(ziel1: Zauberer, ziel2: Zauberer, ziel3: Zauberer) {
-        val flaechenZauber: Int = 100
+        val flaechenZauber: Int = 150
         if (ziel1.hp > 0 || ziel2.hp > 0 || ziel3.hp > 0) {
             println("$name hat Attacke Flächenzauber angewendet. Schaden: $flaechenZauber punkte")
             ziel1.hp -= flaechenZauber
@@ -80,4 +80,5 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
             println("$name hat $dunklerschaden Schaden erhalten. Aktuelle HP: $hp")
         }
     }
+
 }
