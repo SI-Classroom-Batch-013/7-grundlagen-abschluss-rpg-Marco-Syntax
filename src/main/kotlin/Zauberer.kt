@@ -83,7 +83,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
             vitamine--
             vitaminZugriff = false
         } else {
-            println("$name hat keinen Zugriff auf den Zauber.")
+            println("$name hat keinen Zugriff mehr auf den Zauber.")
         }
     }
 

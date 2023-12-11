@@ -65,8 +65,6 @@ fun main() {
                 if (lordVoldemort.hp == 0 && nagini.hp > 0) {
                     println("${nagini.name} wird jetzt angegriffen$reset")
                     zauber.angriff(nagini)
-                    nagini.isDead = true
-
                 } else {
                     zauber.angriff(lordVoldemort)
                 }
@@ -79,7 +77,7 @@ fun main() {
         if (lordVoldemort.hp > 0) {
             println("${lordVoldemort.name} startet seinen Angriff")
             lordVoldemort.randomAngriff(helden.random())
-        }  else lordVoldemort.isDead = true
+        }
 
 //Wenn Lord Voldemort gestorben ist, ruft er Nagini zur Hilfe und Nagini führt FlächenZauber aus (Bonusattacke) aus die sie einmal ausführt
         if (lordVoldemort.hp <= 0 && !naginiBonusAttacke) {
@@ -95,7 +93,7 @@ fun main() {
         } else if (lordVoldemort.hp == 300) {
 //Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und 300 hp ist als zusatzattacke
             println()
-            println("${lordVoldemort.name} wurde schwer Verletzt und  ruft Nagini. Sie beißt zu.")
+            println("${lordVoldemort.name} wurde schwer Verletzt und ruft Nagini zur Hilfe. Sie beißt zu.")
             nagini.schlagenBiss(helden.random())
             naginiSchlangenBiss = true
             println()
@@ -119,8 +117,8 @@ fun main() {
             ronWesley.beutelTrank = true
             albusDumbledore.beutelTrank = true
         }
-//Wenn Nagini ihre Bonusattacke gemacht hat und Harry Potter hp größer 300 sind, darf er seine Spezialattacke ausführen
-        if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp > 300) {
+//Wenn Nagini ihre Bonusattacke gemacht (true) hat und Ron Wesley seine hp kleiner 200 und Albus Dumbeldore seine hp kleiner 200 sind, darf Harry Potter seine Spezialattacke ausführen
+        if (naginiBonusAttacke && nagini.hp > 0 && ronWesley.hp < 200 && albusDumbledore.hp < 200) {
             println("${harryPotter.name} darf jetzt seine Spezialattacke Fliegen benutzen")
             println(
                 "            _            _.,----,\n" +
@@ -143,8 +141,8 @@ fun main() {
             )
             harryPotter.fliegen(nagini)
             println()
-            //Wenn Harry Potter seine hp kleiner 300 darf Ron Wesley seine Spezialattacke ausführen
-        } else if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp < 300) {
+            //Wenn Harry Potter seine hp kleiner 200 und Albus Dumbledore hp kleiner 200 sind, darf Ron Wesley seine Spezialattacke ausführen
+        } else if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp < 200 && albusDumbledore.hp < 200) {
             println()
             println("Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
             println(
@@ -156,10 +154,29 @@ fun main() {
                         "3._.' |_+_"
             )
             ronWesley.ratteKrätze(nagini)
-            //Wenn Ron Wesley hp kleiner als 200 sind und Harry seine hp kleiner als 200 sind darf Albus Dumbledore seine Spezialattacke ausführen
+            //Wenn Harry Potter seine hp kleiner 200 und Ron Wesley hp kleiner 200 sind, darf Albus Dumbledore seine Spezialattacke ausführen
         } else if (naginiBonusAttacke && nagini.hp >= 0 && harryPotter.hp < 200 && ronWesley.hp < 200) {
             println()
             println("Albus Dumbledore darf seine Spezialattacke anwenden und ruf seinen Phönix Fakes")
+            println(
+                "                              ___,--------,____\n" +
+                        "                      __--~~~~                 ~~---,_\n" +
+                        "                   ,-'                  __,--,_       `\\,___,-,__\n" +
+                        "                ,-'                 __/'/-~~~\\  `  ` . '    , |  `~~\\\n" +
+                        "             _/`      _/~~      '~~   \\,_\\_ O /        '  '~_/'      `\\\n" +
+                        "           /'        '                   =-'~~  _  /  ~   /'          `\\\n" +
+                        "        _/'  /~                            ,--,____,-----|,_,-,_       `\\\n" +
+                        "    _,/'    '              ,-'      _      `~'------'~~~~~--    `~~~~\\  |\n" +
+                        " ,-'             /~       '    ,-~~~         _,       ,-=~~~~~~~~~~~~'| |\n" +
+                        "~              .'             '         ,   '      /~`                |/\n" +
+                        "                                  /' ,/'       _/~'\n" +
+                        "                   ,       /    /`          _/~ \n" +
+                        "        /~        /      /`               /' \n" +
+                        "      .'                                /' \n" +
+                        "                       /'      .      /\n" +
+                        "                      `       /'     | \n" +
+                        "                                    '"
+            )
             albusDumbledore.fawkesAttacke(nagini)
         }
 
@@ -173,7 +190,7 @@ fun main() {
             gameOver = true
             break
         } else if (lordVoldemort.isDead && nagini.isDead) {
-            println("Das Team der Zauberer hat gewonnen!")
+            println("Die Zauberer haben gewonnen!")
             gameOver = true
             break
         }
