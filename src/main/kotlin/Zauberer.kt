@@ -86,7 +86,7 @@ open class Zauberer(
             vitamine--
             vitaminZugriff = false
         } else {
-            println("$name hat keinen Zugriff mehr auf die auf das Zauberelixier.")
+            println("$name hat keinen Zugriff mehr auf das Zauberelixier.")
         }
     }
 }

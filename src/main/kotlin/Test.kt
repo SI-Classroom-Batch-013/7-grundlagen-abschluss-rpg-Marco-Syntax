@@ -30,7 +30,7 @@ fun main() {
 
 
     println(
-        "$magenta                                        _ __\n" +
+        "$cyan                                        _ __\n" +
                 "        ___                             | '  \\\n" +
                 "   ___  \\ /  ___         ,'\\_           | .-. \\        /|\n" +
                 "   \\ /  | |,'__ \\  ,'\\_  |   \\          | | | |      ,' |_   /|\n" +
@@ -50,8 +50,8 @@ fun main() {
     while (!gameOver) {
         println("         ----Runde:$round----")
         println()
-        println("$magenta-----Dein Team-----$reset")
-        helden.forEach { println("$magenta Der Zauber ${it.name} hat Lebenspunkte: ${it.hp}$reset") }
+        println("$yellow-----Dein Team-----$reset")
+        helden.forEach { println("$yellow Der Zauber ${it.name} hat Lebenspunkte: ${it.hp}$reset") }
         println()
         println("$red------Gegner Team-----$reset")
         gegner.forEach { println("$red Dein Gegner ist ${it.name} und hat Lebenspunkte: ${it.hp}$reset") }
@@ -75,6 +75,7 @@ fun main() {
             } else {
                 println("${zauber.name} hat 0 Lebenspunkte und kann nicht angreifen.")
             }
+
             //hier wird das spielende geprüft
             if (lordVoldemort.hp <= 0 && nagini.hp <= 0) {
                 println("Die Zauberer haben gewonnen ")
@@ -95,17 +96,22 @@ fun main() {
 
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
-            println("${lordVoldemort.name} startet seinen Angriff")
+            println()
+            println("$red${lordVoldemort.name} startet seinen Angriff")
             lordVoldemort.randomAngriff(helden.random())
 // Wenn Lord Voldemort keine hp mehr hat, dann greift nagini an
-        } else if (lordVoldemort.hp == 0) {
+        } else if (lordVoldemort.hp == 0 && nagini.hp > 0) {
+            lordVoldemort.isDead = true
             nagini.randomAngriff(helden.random())
+        } else if (nagini.hp <= 0) {
+            nagini.isDead = true
         }
 //Wenn Lord Voldemort gestorben ist, ruft er Nagini zur Hilfe und Nagini führt FlächenZauber aus (Bonusattacke) aus die sie einmal ausführt
         if (lordVoldemort.hp <= 0 && !naginiBonusAttacke) {
+            println()
             lordVoldemort.isDead = true
-            println("${lordVoldemort.name} ist gestorben und hat Nagini herbeigerufen.")
-            println("Nagini taucht auf  führt eine Bonusattacke (Flächenzauber) aus die alle Zauber verletzt.")
+            println("$red${lordVoldemort.name} ist gestorben und hat Nagini herbeigerufen.")
+            println("$red Nagini taucht auf  führt eine Bonusattacke (Flächenzauber) aus die alle Zauber verletzt.$reset")
             println()
 //Nagini führt ein Flächenzauber aus und fügt allen Zauberern Schaden zu
             nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
@@ -131,17 +137,17 @@ fun main() {
 // Wenn die hp unter 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben.
 // Der Heiltrank darf nur einmal pro Runde benutzt werden, und wenn ein Zauberer tot ist, bekommt er keinen mehr. wird mit einer range überprüft
         if ((harryPotter.hp in 1..200) || (ronWesley.hp in 1..200) || (albusDumbledore.hp in 1..200)) {
-            // Der Beuteltrank wird benutzt und ein zufälliger lebender Zauberer wird ausgewählt mit der filter funktion
+            // Der Beuteltrank wird benutzt und ein zufälliger lebender Zauberer wird ausgewählt mit der Lambdafunktion filter benutzt
             val zaubererMitHeiltrank = helden.filter { it.hp > 0 }.random()
-            println("Es wird ein zufälliger lebender Zauberer ausgewählt, der eine Heilung bekommt: ${zaubererMitHeiltrank.name}")
+            println("$blue Es wird ein zufälliger lebender Zauberer ausgewählt, der eine Heilung bekommt: ${zaubererMitHeiltrank.name}")
             zaubererMitHeiltrank.beutelTrank()
             println()
         }
-//Wenn Nagini ihre Bonusattacke gemacht (true) hat und Ron Wesley seine hp kleiner 200 und Albus Dumbeldore seine hp kleiner 200 sind, darf Harry Potter seine Spezialattacke ausführen
+//Wenn Nagini ihre Bonusattacke gemacht (true) hat und Ron Wesley seine hp kleiner 300 und Albus Dumbeldore seine hp kleiner 200 sind, darf Harry Potter seine Spezialattacke ausführen
         if (naginiBonusAttacke && nagini.hp > 0 && ronWesley.hp < 300 && albusDumbledore.hp < 300) {
             //Überprüft ob Bonusattacke nicht true ist
             if (!harryPotter.bonusAttacke) {
-                println("${harryPotter.name} darf jetzt seine Spezialattacke Fliegen benutzen")
+                println("$yellow${harryPotter.name} darf jetzt seine Spezialattacke Fliegen benutzen")
                 println(
                     "            _            _.,----,\n" +
                             " __  _.-._ / '-.        -  ,._  \\) \n" +
@@ -159,18 +165,17 @@ fun main() {
                             "     '--' '-.\\__/ _L   .`'         './/\n" +
                             "                 [ (  /\n" +
                             "                  ) `{\n" +
-                            "       snd        \\__)"
+                            "                  \\__)"
                 )
                 harryPotter.fliegen(nagini)
                 harryPotter.bonusAttacke = true
                 println()
             }
-
-            //Wenn Harry Potter seine hp kleiner 200 und Albus Dumbledore hp kleiner 200 sind, darf Ron Wesley seine Spezialattacke ausführen
+            //Wenn Harry Potter seine hp kleiner 300 und Albus Dumbledore hp kleiner 300 sind, darf Ron Wesley seine Spezialattacke ausführen
         } else if (naginiBonusAttacke && nagini.hp >= 0 && harryPotter.hp < 300 && albusDumbledore.hp < 300) {
             if (!ronWesley.bonusAttacke) {
                 println()
-                println("Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
+                println("$yellow Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
                 println(
                     "      /m'\n" +
                             "      (oo\\\n" +
@@ -186,7 +191,7 @@ fun main() {
         } else if (naginiBonusAttacke && nagini.hp >= 0 && harryPotter.hp <= 300 && ronWesley.hp <= 300) {
             if (!albusDumbledore.bonusAttacke) {
                 println()
-                println("Albus Dumbledore darf seine Spezialattacke anwenden und ruf seinen Phönix Fakes")
+                println("$yellow Albus Dumbledore darf seine Spezialattacke anwenden und ruf seinen Phönix Fakes")
                 println(
                     "                              ___,--------,____\n" +
                             "                      __--~~~~                 ~~---,_\n" +
@@ -210,10 +215,8 @@ fun main() {
                 albusDumbledore.bonusAttacke = true
             }
         }
-
         round++
     }
     // Spielende ausgeben
-
     println("ENDE")
 }
