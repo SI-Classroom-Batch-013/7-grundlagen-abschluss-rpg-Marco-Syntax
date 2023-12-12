@@ -9,6 +9,7 @@ fun main() {
 
     var helden: MutableList<Zauberer> = mutableListOf(harryPotter, ronWesley, albusDumbledore)
     var gegner: MutableList<DunklerZauberer> = mutableListOf(lordVoldemort, nagini)
+
     val red = "\u001B[31m"
     val green = "\u001B[32m"
     val yellow = "\u001B[33m"
@@ -75,7 +76,6 @@ fun main() {
             } else {
                 println("${zauber.name} hat 0 Lebenspunkte und kann nicht angreifen.")
             }
-
             //hier wird das spielende geprüft
             if (lordVoldemort.hp <= 0 && nagini.hp <= 0) {
                 println("Die Zauberer haben gewonnen ")
@@ -91,11 +91,7 @@ fun main() {
                 break
             }
 
-
-
         }
-
-
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
             println()
@@ -132,13 +128,13 @@ fun main() {
         if (naginiSchlangenBiss) {
             helden.random().vitamine()
             //Lambdafunktion verwendet, um den Zugriff auf false zu setzen, bei allen Zauberern
-            helden.map { it.vitaminZugriff= false }
+            helden.map { it.vitaminZugriff = false }
         }
 // Wenn die hp unter oder gleich 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben.
 // Der Heiltrank darf nur einmal pro Runde benutzt werden, und wenn ein Zauberer tot ist, bekommt er keinen mehr. wird mit einer range überprüft
         if ((harryPotter.hp in 1..200) || (ronWesley.hp in 1..200) || (albusDumbledore.hp in 1..200)) {
             // Der Beuteltrank wird benutzt und ein zufälliger lebender Zauberer wird ausgewählt mit der Lambdafunktion filter benutzt
-            val zaubererMitHeiltrank:Zauberer = helden.filter { it.hp > 0 }.random()
+            val zaubererMitHeiltrank: Zauberer = helden.filter { it.hp > 0 }.random()
             println("Es wird ein zufälliger lebender Zauberer ausgewählt, der eine Heilung bekommt: ${zaubererMitHeiltrank.name}")
             zaubererMitHeiltrank.beutelTrank()
             println()

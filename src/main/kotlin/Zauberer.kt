@@ -81,12 +81,12 @@ open class Zauberer(
     fun vitamine() {
         if (vitaminZugriff) {
             val erhöhung = (hp / 100) * 10
-            println("$name hat ein Zauberelixier genommen. Seine Energie wird  um 10% erhöht.")
+            println("$name hat ein Zauberelixier benommen. Seine Energie wird  um 10% erhöht.")
             hp += erhöhung
             vitamine--
             vitaminZugriff = false
         } else {
-            println("$name hat keinen Zugriff mehr auf das Zauberelixier.")
+            println("$name hat keinen Zugriff auf das Zauberelixier.")
         }
     }
 }
