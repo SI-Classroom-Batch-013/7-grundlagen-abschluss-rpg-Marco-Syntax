@@ -1,11 +1,12 @@
-open class Zauberer(var name: String, var hp: Int, var action: Action, var schutzZauberAktiv: Boolean = false,
-    var vitaminZugriff: Boolean = true,var beutelTrank:Boolean=false, var isDead: Boolean = false) {
-//Any erlaubt mir jeden typ zu übergeben
+open class Zauberer(
+    var name: String, var hp: Int, var action: Action, var schutzZauberAktiv: Boolean = false,
+    var vitaminZugriff: Boolean = true, var beutelTrank: Boolean = false, var bonusAttacke: Boolean = false) {
+    //Any erlaubt mir jeden typ zu übergeben
     open val zaubersprueche: MutableMap<String, Any> = mutableMapOf(
-        "expecto patronum" to  50,
-        "stupor" to  100,
-        "expelliarmus" to  150,
-        "avada kedavra" to  300,
+        "expecto patronum" to 50,
+        "stupor" to 100,
+        "expelliarmus" to 150,
+        "avada kedavra" to 300,
     )
 
     //Hilfsfunktion
@@ -13,7 +14,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
         return action.zauberSpruchAnwenden(readln())
     }
 
-    //Gibt die Liste mit Zaubersprüchen aus mit einer for i schleife
+    //Gibt die Liste mit Zaubersprüchen aus mit einer for i schleife aus
     fun zauberSpruchListe() {
         var zahl = 1
         for (i in zaubersprueche) {
@@ -21,12 +22,12 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
             zahl++
         }
     }
+
     // Führt ein Angriff aus
     open fun angriff(ziel: DunklerZauberer) {
         println("$name hat $hp Lebenspunkte und möchte ${ziel.name} angreifen er hat ${ziel.hp} Lebenspunkte")
         println()
         zauberSpruchListe()
-        println()
         println("Bitte gib ein Zauberspruch ein:")
         // Hier kann man verschiedene Zaubersprüche auswählen über die Konsole
         val schaden = action.zauberSpruchAnwenden(readln())
@@ -40,7 +41,7 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
 
     //Heilt den Zauber um die hälfte seine Lebenspunkte
     fun heilungsmethoden() {
-        val heilung: Int = hp/2
+        val heilung: Int = hp / 2
         hp + heilung
         println(
             "$name hat eine Heilungsmethode angewendet und erhält $heilung lebenspunkte Heilung" +
@@ -80,15 +81,12 @@ open class Zauberer(var name: String, var hp: Int, var action: Action, var schut
     fun vitamine() {
         if (vitaminZugriff) {
             val erhöhung = (hp / 100) * 10
-            println("$name hat Vitamine genommen. Seine Energie wird  um 10% erhöht.")
+            println("$name hat ein Zauberelixier genommen. Seine Energie wird  um 10% erhöht.")
             hp += erhöhung
             vitamine--
             vitaminZugriff = false
         } else {
-            println("$name hat keinen Zugriff mehr auf die Vitamine .")
-
+            println("$name hat keinen Zugriff mehr auf die auf das Zauberelixier.")
         }
     }
-
-
 }

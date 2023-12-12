@@ -3,9 +3,9 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
     fun randomAngriff(auf: Zauberer) {
         if (auf.hp > 0) {
             val angriffListe = listOf(
-                { feuerSturm(auf) },
-                { fluchDesTodes(auf) },
-                { dementorenAttacke(auf) },
+                { feuerSturm(auf)},
+                { fluchDesTodes(auf)},
+                { dementorenAttacke(auf)},
             )
             val randomAttacke = angriffListe.random()
             randomAttacke()
