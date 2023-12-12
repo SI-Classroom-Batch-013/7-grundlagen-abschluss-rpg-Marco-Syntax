@@ -58,7 +58,7 @@ fun main() {
 
 // Jeder Zauberer in der helden-Liste greift an
         for (zauber in helden) {
-            println("$blue${zauber.name} startet seinen Angriff")
+            println("${zauber.name} startet seinen Angriff")
             // Überprüfen, ob der Zauberer noch Lebenspunkte hat um anzugreifen
             if (zauber.hp > 0) {
 // Wenn Lord Voldemort besiegt wurde, dann Nagini angreifen
@@ -91,13 +91,15 @@ fun main() {
                 break
             }
 
+
+
         }
 
 
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
             println()
-            println("$red${lordVoldemort.name} startet seinen Angriff")
+            println("${lordVoldemort.name} startet seinen Angriff")
             lordVoldemort.randomAngriff(helden.random())
 // Wenn Lord Voldemort keine hp mehr hat, dann greift nagini an
         } else if (lordVoldemort.hp == 0 && nagini.hp > 0) {
@@ -111,7 +113,7 @@ fun main() {
             println()
             lordVoldemort.isDead = true
             println("$red${lordVoldemort.name} ist gestorben und hat Nagini herbeigerufen.")
-            println("$red Nagini taucht auf  führt eine Bonusattacke (Flächenzauber) aus die alle Zauber verletzt.$reset")
+            println("$red Nagini taucht auf  führt eine Bonusattacke (Flächenzauber) aus die alle Zauberer verletzt.$reset")
             println()
 //Nagini führt ein Flächenzauber aus und fügt allen Zauberern Schaden zu
             nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
@@ -129,17 +131,15 @@ fun main() {
         //Wenn der Schlagenbiss true ist, dann wird ein Magisches elixier aufgerufen ein zufälliger Zauberer bekommt einmalig das elixier und die hp wird um 10 % erhöht
         if (naginiSchlangenBiss) {
             helden.random().vitamine()
-            harryPotter.vitaminZugriff = false
-            ronWesley.vitaminZugriff = false
-            albusDumbledore.vitaminZugriff = false
-
+            //Lambdafunktion verwendet, um den Zugriff auf false zu setzen, bei allen Zauberern
+            helden.map { it.vitaminZugriff= false }
         }
-// Wenn die hp unter 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben.
+// Wenn die hp unter oder gleich 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben.
 // Der Heiltrank darf nur einmal pro Runde benutzt werden, und wenn ein Zauberer tot ist, bekommt er keinen mehr. wird mit einer range überprüft
         if ((harryPotter.hp in 1..200) || (ronWesley.hp in 1..200) || (albusDumbledore.hp in 1..200)) {
             // Der Beuteltrank wird benutzt und ein zufälliger lebender Zauberer wird ausgewählt mit der Lambdafunktion filter benutzt
-            val zaubererMitHeiltrank = helden.filter { it.hp > 0 }.random()
-            println("$blue Es wird ein zufälliger lebender Zauberer ausgewählt, der eine Heilung bekommt: ${zaubererMitHeiltrank.name}")
+            val zaubererMitHeiltrank:Zauberer = helden.filter { it.hp > 0 }.random()
+            println("Es wird ein zufälliger lebender Zauberer ausgewählt, der eine Heilung bekommt: ${zaubererMitHeiltrank.name}")
             zaubererMitHeiltrank.beutelTrank()
             println()
         }
@@ -218,5 +218,5 @@ fun main() {
         round++
     }
     // Spielende ausgeben
-    println("ENDE")
+    println("Das Spiel ist vorbei!")
 }
