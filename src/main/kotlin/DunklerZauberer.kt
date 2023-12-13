@@ -57,13 +57,13 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
     fun flächenZauber(ziel1: Zauberer, ziel2: Zauberer, ziel3: Zauberer) {
         val flaechenZauber: Int = 100
         if (ziel1.hp > 0 || ziel2.hp > 0 || ziel3.hp > 0) {
-            println("$name hat Attacke Flächenzauber angewendet. Schaden: $flaechenZauber punkte")
+            println("$red$name hat Attacke Flächenzauber angewendet. Schaden: $flaechenZauber punkte$reset")
             ziel1.hp -= flaechenZauber
             ziel2.hp -= flaechenZauber
             ziel3.hp -= flaechenZauber
-            println("${ziel1.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel1.hp} lebenspunkte")
+            println("$blue${ziel1.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel1.hp} lebenspunkte")
             println("${ziel2.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel2.hp} lebenspunkte")
-            println("${ziel3.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel3.hp} lebenspunkte")
+            println("${ziel3.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel3.hp} lebenspunkte$reset")
         } else if (ziel1.hp == 0 || ziel2.hp == 0 || ziel3.hp == 0) {
             println(" Zauber ist schon besiegt")
         }
@@ -75,9 +75,9 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
         hp -= dunklerschaden
         if (hp <= 0) {
             hp = 0
-            println("${this.name} wurde besiegt ")
+            println("$red${this.name} wurde besiegt ")
         } else {
-            println("$name hat $dunklerschaden Schaden erhalten. Aktuelle HP: $hp")
+            println("$red$name hat $dunklerschaden Schaden erhalten. Aktuelle HP: $hp$reset")
         }
     }
 }

@@ -1,5 +1,3 @@
-import java.awt.Color
-
 open class Action {
     open val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
         "expecto patronum" to  50,
@@ -7,7 +5,7 @@ open class Action {
         "expelliarmus" to  150,
         "avada kedavra" to  200
     )
-//Hier wird der Schaden von der map genommen man gibt den key ein und bekommt den Value wert als zauberSpruch schaden und man hat 3 versuche
+//Hier wird der Schaden von der map genommen man gibt den key ein und bekommt den Value wert als zauberSpruchschaden und man hat 3 versuche es wird über die readline eingeben
     open fun zauberSpruchAnwenden(zauberSpruchName: String): Int? {
         var zauberSpruchSchaden = zaubersprueche[zauberSpruchName]
         var versuche = 1
@@ -25,18 +23,17 @@ open class Action {
         if (zauberSpruchSchaden == null) {
             println("Drei Versuche wurden erreicht. Angriff wurde abgebrochen.")
         } else {
-            println("Zauber: $zauberSpruchName, Schaden: $zauberSpruchSchaden hP")
+            println("${blue}Zauber: $zauberSpruchName, Schaden: $zauberSpruchSchaden hP$reset")
         }
         return zauberSpruchSchaden
     }
-
 }
 
 
-
+//Außerhalb der klasse
 fun titelUeberschrift(){
     println(
-        "${cyan}                                        _ __\n" +
+        "$yellow                                        _ __\n" +
                 "        ___                             | '  \\\n" +
                 "   ___  \\ /  ___         ,'\\_           | .-. \\        /|\n" +
                 "   \\ /  | |,'__ \\  ,'\\_  |   \\          | | | |      ,' |_   /|\n" +
@@ -48,7 +45,7 @@ fun titelUeberschrift(){
                 "   | |  | |\\___,_\\ /_\\ _      //       | |     | \\_/ || |   | | | |  /\\| |\n" +
                 "   /_\\  | |           //_____//       .||`      `._,' | |   | | \\ `-' /| |\n" +
                 "        /_\\           `------'        \\ |          `.\\  | |  `._,' /_\\\n" +
-                "                                       \\|     DER MAGISCHE KAMPF           `.\\$reset"
+                "                                       \\|    $reset DER MAGISCHE KAMPF           "
     )
     println()
     println("      ----Der Kampf Beginnt----")

@@ -23,10 +23,10 @@ open class Zauberer(
     }
     // Führt ein Angriff aus
     open fun angriff(ziel: DunklerZauberer) {
-        println("$name hat $hp Lebenspunkte und möchte ${ziel.name} angreifen er hat ${ziel.hp} Lebenspunkte")
+        println("$blue$name hat $hp Lebenspunkte und möchte ${ziel.name} angreifen er hat ${ziel.hp} Lebenspunkte")
         println()
         zauberSpruchListe()
-        println("Bitte gib ein Zauberspruch ein:")
+        println("Bitte gib ein Zauberspruch ein:$reset")
         // Hier kann man verschiedene Zaubersprüche auswählen über die Konsole
         val schaden = action.zauberSpruchAnwenden(readln())
         if (schaden != null) {
@@ -66,7 +66,7 @@ open class Zauberer(
             // Heilt den Zauberer um die Hälfte seiner Lebenspunkte
             val heilung = 200
             hp += heilung
-            println("$name hat einen Heiltrank verwendet und wurde um $heilung Lebenspunkte geheilt.")
+            println("$yellow$name hat einen Heiltrank verwendet und wurde um $heilung Lebenspunkte geheilt$reset.")
             heiltrankAnwendungen--
         } else {
             println("Der Heiltrank kann nicht mehr verwendet werden, er wurde bereits drei Mal eingesetzt.")
@@ -78,12 +78,12 @@ open class Zauberer(
     fun elixier() {
         if (elixierZugriff) {
             val erhöhung = (hp / 100) * 10
-            println("Naginis Biss ist giftig es wird Magischer Heilzauber beschworen ")
+            println("${yellow}Naginis Biss ist giftig es wird Magischer Heilzauber beschworen ")
             println("$name hat ein Zauberelixier bekommen. Seine Energie wird  um 10% erhöht.")
             hp += erhöhung
             elixierAnzahl--
         } else {
-            println("$name hat keinen Zugriff auf das Zauberelixier.")
+            println("$yellow$name hat keinen Zugriff auf das Zauberelixier.$reset")
         }
     }
 }

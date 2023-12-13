@@ -1,5 +1,3 @@
-
-
 // Zauberer und Gegner erstellt
 val harryPotter: HarryPotter = HarryPotter("Harry Potter", 400, Action())
 val ronWesley: RonWesley = RonWesley("Ron Wesley", 400, Action())
