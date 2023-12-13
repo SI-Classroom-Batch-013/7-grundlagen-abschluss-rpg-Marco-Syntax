@@ -1,6 +1,7 @@
 
 fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
-    while (!gameOver) {// Jeder Zauberer in der helden-Liste greift an
+    while (!gameOver) {
+        println("         ----Runde:$round----")
         println()
         println("$blue-----Dein Team-----$reset")
         helden.forEach { println("$blue Der Zauber ${it.name} hat Lebenspunkte: ${it.hp}$reset") }
@@ -9,7 +10,7 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
         println("$red------Gegner Team-----$reset")
         gegner.forEach { println("$red Dein Gegner ist ${it.name} und hat Lebenspunkte: ${it.hp}$reset") }
         Thread.sleep(2000)
-        println("         ----Runde:$round----")
+
         for (zauber in helden) {
             println("$blue${zauber.name} startet seinen Angriff")
             // Überprüfen, ob der Zauberer noch Lebenspunkte hat um anzugreifen
@@ -17,7 +18,6 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
 // Wenn Lord Voldemort besiegt wurde, dann Nagini angreifen
                 if (lordVoldemort.hp == 0 && nagini.hp > 0 && !nagini.isDead) {
                     println("${nagini.name} wird jetzt angegriffen")
-                    Thread.sleep(2000)
                     zauber.angriff(nagini)
                     if (nagini.hp == 0) {
                         nagini.isDead = true
@@ -25,7 +25,6 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                     }
                 } else {
                     //Angriff auf Lord Voldemort
-                    Thread.sleep(2000)
                     zauber.angriff(lordVoldemort)
                 }
             } else {
@@ -46,7 +45,11 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                 break
             }
 
+
         }
+        //Hier ist der Held der Vergiftet wurden ist der auch das elixier bekommt
+        var heldIstVergiftet =helden.random()
+
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
             println()
@@ -78,7 +81,9 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
             println()
             Thread.sleep(2000)
             println("${lordVoldemort.name} wurde schwer Verletzt und ruft Nagini zur Hilfe. Sie beißt zu!")
-            nagini.schlagenBiss(helden.random())
+
+                nagini.schlagenBiss(heldIstVergiftet)
+
             println("$green           /^\\/^\\\n" +
                     "         _|__|  O|\n" +
                     "\\/     /~     \\_/ \\\n" +
@@ -98,11 +103,14 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                     "               ~--______-~                ~-___-~\n$reset")
             naginiSchlangenBiss = true
             println()
-            Thread.sleep(3000)
+            Thread.sleep(1000)
+            heldIstVergiftet.isVergiftet =true
+            heldIstVergiftet.gift()
+
         }
         //Wenn der Schlagenbiss true ist, dann wird ein Magisches elixier aufgerufen ein zufälliger Zauberer bekommt einmalig das elixier und die hp wird um 10 % erhöht
         if (naginiSchlangenBiss && !gameOver) {
-            helden.random().elixier()
+            heldIstVergiftet.elixier()
             //Lambdafunktion verwendet, um den Zugriff auf false zu setzen, bei allen Zauberern
             helden.map { it.elixierZugriff = false }
         }
@@ -148,7 +156,6 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                 println()
                 Thread.sleep(2000)
             }
-
             //Wenn Harry Potter seine hp kleiner 300 und Albus Dumbledore hp kleiner 300 sind, darf Ron Wesley seine Spezialattacke ausführen
         } else if (naginiBonusAttacke && nagini.hp > 0 && ronWesley.hp > 200) {
             if (!ronWesley.bonusAttacke) {

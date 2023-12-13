@@ -6,10 +6,12 @@ class Nagini (name:String,hp:Int): DunklerZauberer (name, hp) {
             Thread.sleep(2000)
             println("$red$name hat Attacke Schlagenbiss gegen ${ziel.name} angewendet. Schaden: $schlagenBiss punkte$reset")
             ziel.hp -= schlagenBiss
-            println("$red${ziel.name} hat noch ${ziel.hp} lebenspunkte$reset")
+            println("$red${ziel.name} hat noch ${ziel.hp} lebenspunkte und wurde vergiftet$reset")
         } else if (ziel.hp == 0) {
             println("${ziel.name} wurde besiegt")
         }
     }
 
 }
+//var ist vergiftet muss jeder held haben
+//for schleife sind die vergifte dann ziehe immer 10% ab

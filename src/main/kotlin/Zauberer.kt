@@ -1,8 +1,13 @@
 open class Zauberer(
-    var name: String, var hp: Int, var action: Action, var schutzZauberAktiv: Boolean = false,
-    var elixierZugriff: Boolean = true, var beutelTrank: Boolean = false, var bonusAttacke: Boolean = false) {
+    var name: String, var hp: Int, var action: Action,
+    var schutzZauberAktiv: Boolean = false,
+    var elixierZugriff: Boolean = true,
+    var beutelTrank: Boolean = false,
+    var bonusAttacke: Boolean = false,
+    var isVergiftet: Boolean = false
+) {
 
-    open val zaubersprueche: MutableMap<String,Int> = mutableMapOf(
+    open val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
         "expecto patronum" to 50,
         "stupor" to 100,
         "expelliarmus" to 150,
@@ -13,6 +18,7 @@ open class Zauberer(
     open fun zauberSpruchAnwenden(): Int? {
         return action.zauberSpruchAnwenden(readln())
     }
+
     //Gibt die Liste mit Zaubersprüchen aus mit einer for i schleife aus
     fun zauberSpruchListe() {
         var zahl = 1
@@ -21,6 +27,7 @@ open class Zauberer(
             zahl++
         }
     }
+
     // Führt ein Angriff aus
     open fun angriff(ziel: DunklerZauberer) {
         println("$blue$name hat $hp Lebenspunkte und möchte ${ziel.name} angreifen er hat ${ziel.hp} Lebenspunkte")
@@ -34,6 +41,17 @@ open class Zauberer(
         } else if (ziel.hp <= 0) {
             ziel.isDead = true
         }
+    }
+    //Hier wird dem Zauber "das Gift" abgezogen
+    open fun gift() {
+       if (isVergiftet) {
+            println("$name ist vergiftet Aktuelle :$hp")
+            if (hp > 0) {
+                hp -= (hp * 0.1).toInt()
+                println("$name hat $hp Lebenspunkte das Gift zieht ihm weiter 10% ab")
+            isVergiftet=false
+            }
+       }
     }
 
     //Heilt den Zauber um die hälfte seine Lebenspunkte
@@ -73,15 +91,16 @@ open class Zauberer(
         }
     }
 
-    //Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 10%
+    //Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 10
     var elixierAnzahl = 1
     fun elixier() {
         if (elixierZugriff) {
-            val erhöhung = (hp / 100) * 10
-            println("${yellow}Naginis Biss ist giftig es wird Magischer Heilzauber beschworen ")
-            println("$name hat ein Zauberelixier bekommen. Seine Energie wird  um 10% erhöht.")
-            hp += erhöhung
+            val heilung = 10
+            println("${yellow}Naginis Biss war giftig es wird Heilzauber beschworen ")
+            println("$name bekommt ein Zauberelixier . Seine Energie wird jetzt  um 10 hp erhöht.")
+            hp += heilung
             elixierAnzahl--
+
         } else {
             println("$yellow$name hat keinen Zugriff auf das Zauberelixier.$reset")
         }

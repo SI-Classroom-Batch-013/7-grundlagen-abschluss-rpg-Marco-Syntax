@@ -61,7 +61,7 @@ open class DunklerZauberer(var name: String, var hp: Int, var isDead: Boolean = 
             ziel1.hp -= flaechenZauber
             ziel2.hp -= flaechenZauber
             ziel3.hp -= flaechenZauber
-            println("$blue${ziel1.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel1.hp} lebenspunkte")
+            println("$red${ziel1.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel1.hp} lebenspunkte")
             println("${ziel2.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel2.hp} lebenspunkte")
             println("${ziel3.name} hat $flaechenZauber Schaden erhalten und hat noch ${ziel3.hp} lebenspunkte$reset")
         } else if (ziel1.hp == 0 || ziel2.hp == 0 || ziel3.hp == 0) {
