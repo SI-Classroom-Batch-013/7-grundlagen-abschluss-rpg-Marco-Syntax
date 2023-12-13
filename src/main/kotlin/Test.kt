@@ -1,8 +1,8 @@
 fun main() {
     // Zauberer und Gegner erstellt
-    val harryPotter: HarryPotter = HarryPotter("Harry Potter", 300, Action())
-    val ronWesley: RonWesley = RonWesley("Ron Wesley", 300, Action())
-    val albusDumbledore: AlbusDumbledore = AlbusDumbledore("Albus Dumbledore", 300, Action())
+    val harryPotter: HarryPotter = HarryPotter("Harry Potter", 400, Action())
+    val ronWesley: RonWesley = RonWesley("Ron Wesley", 400, Action())
+    val albusDumbledore: AlbusDumbledore = AlbusDumbledore("Albus Dumbledore", 400, Action())
 
     val lordVoldemort: LordVoldemort = LordVoldemort("Lord Voldemort", 600)
     val nagini: Nagini = Nagini("Nagini", 300)
@@ -116,7 +116,7 @@ fun main() {
             println()
             naginiBonusAttacke = true
 //Zusatz Attacke für voldemort, wenn hp 300 sind
-        } else if (lordVoldemort.hp == 300) {
+        } else if (lordVoldemort.hp == 300 && !gameOver) {
 //Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und 300 hp ist als zusatzattacke
             println()
             println("${lordVoldemort.name} wurde schwer Verletzt und ruft Nagini zur Hilfe. Sie beißt zu!")
@@ -125,22 +125,24 @@ fun main() {
             println()
         }
         //Wenn der Schlagenbiss true ist, dann wird ein Magisches elixier aufgerufen ein zufälliger Zauberer bekommt einmalig das elixier und die hp wird um 10 % erhöht
-        if (naginiSchlangenBiss) {
-            helden.random().vitamine()
+        if (naginiSchlangenBiss && !gameOver) {
+            helden.random().elixier()
             //Lambdafunktion verwendet, um den Zugriff auf false zu setzen, bei allen Zauberern
-            helden.map { it.vitaminZugriff = false }
+            helden.map { it.elixierZugriff = false }
         }
+
 // Wenn die hp unter oder gleich 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben.
 // Der Heiltrank darf nur einmal pro Runde benutzt werden, und wenn ein Zauberer tot ist, bekommt er keinen mehr. wird mit einer range überprüft
-        if ((harryPotter.hp in 1..200) || (ronWesley.hp in 1..200) || (albusDumbledore.hp in 1..200)) {
-            // Der Beuteltrank wird benutzt und ein zufälliger lebender Zauberer wird ausgewählt mit der Lambdafunktion filter benutzt
+        if ((harryPotter.hp in 1..200) || (ronWesley.hp in 1..200) || (albusDumbledore.hp in 1..200) && !gameOver) {
+            // Der Beuteltrank wird benutzt und ein zufälliger lebender Zauberer wird ausgewählt mit der Lambdafunktion filter wird überprüft, ob die hp zwischen 1 und 200 liegen
             val zaubererMitHeiltrank: Zauberer = helden.filter { it.hp > 0 }.random()
-            println("Es wird ein zufälliger lebender Zauberer ausgewählt, der eine Heilung bekommt: ${zaubererMitHeiltrank.name}")
+            println("Es wird ein lebender Zauberer ausgewählt, der eine Heilung bekommt: ${zaubererMitHeiltrank.name}")
             zaubererMitHeiltrank.beutelTrank()
             println()
         }
+
 //Wenn Nagini ihre Bonusattacke gemacht (true) hat und Ron Wesley seine hp kleiner 300 und Albus Dumbeldore seine hp kleiner 200 sind, darf Harry Potter seine Spezialattacke ausführen
-        if (naginiBonusAttacke && nagini.hp > 0 && ronWesley.hp < 300 && albusDumbledore.hp < 300) {
+        if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp > 200) {
             //Überprüft ob Bonusattacke nicht true ist
             if (!harryPotter.bonusAttacke) {
                 println("$yellow${harryPotter.name} darf jetzt seine Spezialattacke Fliegen benutzen")
@@ -167,8 +169,9 @@ fun main() {
                 harryPotter.bonusAttacke = true
                 println()
             }
+
             //Wenn Harry Potter seine hp kleiner 300 und Albus Dumbledore hp kleiner 300 sind, darf Ron Wesley seine Spezialattacke ausführen
-        } else if (naginiBonusAttacke && nagini.hp >= 0 && harryPotter.hp < 300 && albusDumbledore.hp < 300) {
+        } else if (naginiBonusAttacke && nagini.hp > 0 && ronWesley.hp > 200) {
             if (!ronWesley.bonusAttacke) {
                 println()
                 println("$yellow Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
@@ -184,7 +187,7 @@ fun main() {
                 ronWesley.bonusAttacke = true
             }
             //Wenn Harry Potter seine hp kleiner 200 und Ron Wesley hp kleiner 200 sind, darf Albus Dumbledore seine Spezialattacke ausführen
-        } else if (naginiBonusAttacke && nagini.hp >= 0 && harryPotter.hp <= 300 && ronWesley.hp <= 300) {
+        } else if (naginiBonusAttacke && nagini.hp > 0 && albusDumbledore.hp > 200) {
             if (!albusDumbledore.bonusAttacke) {
                 println()
                 println("$yellow Albus Dumbledore darf seine Spezialattacke anwenden und ruf seinen Phönix Fakes")

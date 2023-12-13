@@ -3,9 +3,9 @@ open class Action {
         "expecto patronum" to  50,
         "stupor" to  100,
         "expelliarmus" to  150,
-        "avada kedavra" to  300
+        "avada kedavra" to  200
     )
-//Hier wird der Schaden von der map genommen man gibt den key ein und bekommt den Value wert als zauberSpruch schaden
+//Hier wird der Schaden von der map genommen man gibt den key ein und bekommt den Value wert als zauberSpruch schaden und man hat 3 versuche
     open fun zauberSpruchAnwenden(zauberSpruchName: String): Int? {
         var zauberSpruchSchaden = zaubersprueche[zauberSpruchName]
         var versuche = 1

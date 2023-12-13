@@ -1,12 +1,12 @@
 open class Zauberer(
     var name: String, var hp: Int, var action: Action, var schutzZauberAktiv: Boolean = false,
-    var vitaminZugriff: Boolean = true, var beutelTrank: Boolean = false, var bonusAttacke: Boolean = false) {
+    var elixierZugriff: Boolean = true, var beutelTrank: Boolean = false, var bonusAttacke: Boolean = false) {
     //Any erlaubt mir jeden typ zu übergeben
     open val zaubersprueche: MutableMap<String, Any> = mutableMapOf(
         "expecto patronum" to 50,
         "stupor" to 100,
         "expelliarmus" to 150,
-        "avada kedavra" to 300,
+        "avada kedavra" to 200,
     )
 
     //Hilfsfunktion
@@ -77,14 +77,14 @@ open class Zauberer(
     }
 
     //Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 10%
-    var vitamine = 1
-    fun vitamine() {
-        if (vitaminZugriff) {
+    var elixierAnzahl = 1
+    fun elixier() {
+        if (elixierZugriff) {
             val erhöhung = (hp / 100) * 10
-            println("$name hat ein Zauberelixier benommen. Seine Energie wird  um 10% erhöht.")
+            println("Naginis Biss ist giftig es wird Magischer Zauber beschworen und vergibt ein Elixier")
+            println("$name hat ein Zauberelixier bekommen. Seine Energie wird  um 10% erhöht.")
             hp += erhöhung
-            vitamine--
-            vitaminZugriff = false
+            elixierAnzahl--
         } else {
             println("$name hat keinen Zugriff auf das Zauberelixier.")
         }
