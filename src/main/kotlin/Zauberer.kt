@@ -1,8 +1,8 @@
 open class Zauberer(
     var name: String, var hp: Int, var action: Action, var schutzZauberAktiv: Boolean = false,
     var elixierZugriff: Boolean = true, var beutelTrank: Boolean = false, var bonusAttacke: Boolean = false) {
-    //Any erlaubt mir jeden typ zu übergeben
-    open val zaubersprueche: MutableMap<String, Any> = mutableMapOf(
+
+    open val zaubersprueche: MutableMap<String,Int> = mutableMapOf(
         "expecto patronum" to 50,
         "stupor" to 100,
         "expelliarmus" to 150,
@@ -13,7 +13,6 @@ open class Zauberer(
     open fun zauberSpruchAnwenden(): Int? {
         return action.zauberSpruchAnwenden(readln())
     }
-
     //Gibt die Liste mit Zaubersprüchen aus mit einer for i schleife aus
     fun zauberSpruchListe() {
         var zahl = 1
@@ -22,7 +21,6 @@ open class Zauberer(
             zahl++
         }
     }
-
     // Führt ein Angriff aus
     open fun angriff(ziel: DunklerZauberer) {
         println("$name hat $hp Lebenspunkte und möchte ${ziel.name} angreifen er hat ${ziel.hp} Lebenspunkte")
@@ -35,7 +33,6 @@ open class Zauberer(
             ziel.dunklerschadenErhalten(schaden)
         } else if (ziel.hp <= 0) {
             ziel.isDead = true
-
         }
     }
 
@@ -81,7 +78,7 @@ open class Zauberer(
     fun elixier() {
         if (elixierZugriff) {
             val erhöhung = (hp / 100) * 10
-            println("Naginis Biss ist giftig es wird Magischer Zauber beschworen und vergibt ein Elixier")
+            println("Naginis Biss ist giftig es wird Magischer Heilzauber beschworen ")
             println("$name hat ein Zauberelixier bekommen. Seine Energie wird  um 10% erhöht.")
             hp += erhöhung
             elixierAnzahl--
