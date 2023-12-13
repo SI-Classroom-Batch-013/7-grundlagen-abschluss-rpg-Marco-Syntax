@@ -1,3 +1,9 @@
+import java.io.File
+import javax.sound.sampled.AudioInputStream
+import javax.sound.sampled.AudioSystem
+import javax.sound.sampled.Clip
+import javax.sound.sampled.FloatControl
+
 open class Action {
     open val zaubersprueche: MutableMap<String, Int> = mutableMapOf(
         "expecto patronum" to  50,
@@ -62,3 +68,30 @@ val bold = "\u001B[1m"
 val underline = "\u001B[4m"
 val backgroundYellow = "\u001B[43m"
 val reset = "\u001B[0m"
+
+
+fun audio (audiopath : String) {
+
+    val audio: File = File(audiopath)
+
+    val audioInput: AudioInputStream = AudioSystem.getAudioInputStream(audio)
+
+    val clip: Clip = AudioSystem.getClip()
+
+    clip.open(audioInput)
+
+    clip.start()
+
+    if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+        val volume: FloatControl = clip.getControl(FloatControl.Type.MASTER_GAIN) as FloatControl
+
+        volume.value = volume.minimum+(0.75f*(volume.maximum-volume.minimum))
+    } else {
+        println("Master Gain Control not Supported")
+    }
+}
+
+fun gameMusik(){
+    val audiopath = "Sounds/Hedwig's Theme.wav"
+    audio(audiopath)
+}

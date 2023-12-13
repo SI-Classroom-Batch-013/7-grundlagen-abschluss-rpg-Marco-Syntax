@@ -48,7 +48,7 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
 
         }
         //Hier ist der Held der Vergiftet wurden ist der auch das elixier bekommt
-        var heldIstVergiftet =helden.random()
+        val heldIstVergiftet =helden.random()
 
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
@@ -77,7 +77,8 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
             naginiBonusAttacke = true
 //Zusatz Attacke für voldemort, wenn hp 300 sind
         } else if (lordVoldemort.hp == 300 && !gameOver) {
-//Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und 300 hp ist als zusatzattacke
+//Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und 300 hp ist als zusatzattacke,
+            //wenn sie jemanden beißt dann ist dieser vergiftet und ihm werden 10 % hp abgezogen
             println()
             Thread.sleep(2000)
             println("${lordVoldemort.name} wurde schwer Verletzt und ruft Nagini zur Hilfe. Sie beißt zu!")
@@ -108,7 +109,7 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
             heldIstVergiftet.gift()
 
         }
-        //Wenn der Schlagenbiss true ist, dann wird ein Magisches elixier aufgerufen ein zufälliger Zauberer bekommt einmalig das elixier und die hp wird um 10 % erhöht
+        //Wenn der Schlagenbiss true ist, dann wird ein Magisches elixier aufgerufen und der vergiftet Zauber bekommt das elixier und die hp wird um 10 erhöht
         if (naginiSchlangenBiss && !gameOver) {
             heldIstVergiftet.elixier()
             //Lambdafunktion verwendet, um den Zugriff auf false zu setzen, bei allen Zauberern

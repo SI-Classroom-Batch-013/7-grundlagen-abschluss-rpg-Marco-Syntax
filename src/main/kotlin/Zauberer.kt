@@ -45,10 +45,10 @@ open class Zauberer(
     //Hier wird dem Zauber "das Gift" abgezogen
     open fun gift() {
        if (isVergiftet) {
-            println("$name ist vergiftet Aktuelle :$hp")
+            println("$green$name ist vergiftet Aktuelle :$hp")
             if (hp > 0) {
                 hp -= (hp * 0.1).toInt()
-                println("$name hat $hp Lebenspunkte das Gift zieht ihm weiter 10% ab")
+                println("$name hat $hp Lebenspunkte das Gift zieht ihm weiter 10% ab$reset")
             isVergiftet=false
             }
        }
@@ -96,11 +96,10 @@ open class Zauberer(
     fun elixier() {
         if (elixierZugriff) {
             val heilung = 10
-            println("${yellow}Naginis Biss war giftig es wird Heilzauber beschworen ")
-            println("$name bekommt ein Zauberelixier . Seine Energie wird jetzt  um 10 hp erhöht.")
+            println("${green}Naginis Biss war giftig ")
+            println("$green$name bekommt ein Zauberelixier. Seine Energie wird jetzt um 10 hp erhöht.$reset")
             hp += heilung
             elixierAnzahl--
-
         } else {
             println("$yellow$name hat keinen Zugriff auf das Zauberelixier.$reset")
         }
