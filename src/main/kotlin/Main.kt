@@ -11,8 +11,10 @@ var gegner: MutableList<DunklerZauberer> = mutableListOf(lordVoldemort, nagini)
 
 //Bedingung für Spiel Ende
 var gameOver: Boolean = false
+
 // Rundenzähler
 var round: Int = 1
+
 //Bedingung für Bonus Attacke
 var naginiBonusAttacke = false
 var naginiSchlangenBiss = false
@@ -21,6 +23,6 @@ var naginiSchlangenBiss = false
 fun main() {
     gameMusik()
     titelUeberschrift()
-    spiel(helden,gegner)
+    spiel(helden, gegner)
 }
 

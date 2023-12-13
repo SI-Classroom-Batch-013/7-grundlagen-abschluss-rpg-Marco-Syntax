@@ -47,9 +47,12 @@ open class Zauberer(
        if (isVergiftet) {
             println("$green$name ist vergiftet Aktuelle :$hp")
             if (hp > 0) {
-                hp -= (hp * 0.1).toInt()
-                println("$name hat $hp Lebenspunkte das Gift zieht ihm weiter 10% ab$reset")
-            isVergiftet=false
+                val giftSchaden= (hp * 0.1).toInt()
+                println("$name hat ${hp-giftSchaden} Lebenspunkte das Gift zieht ihm 10% ab")
+                hp -= giftSchaden
+                println("$name hat $giftSchaden Lebenspunkte durch das Gift verloren.$reset")
+                isVergiftet = false
+
             }
        }
     }

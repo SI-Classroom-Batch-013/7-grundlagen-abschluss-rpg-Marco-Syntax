@@ -1,4 +1,3 @@
-
 fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
     while (!gameOver) {
         println("         ----Runde:$round----")
@@ -10,6 +9,8 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
         println("$red------Gegner Team-----$reset")
         gegner.forEach { println("$red Dein Gegner ist ${it.name} und hat Lebenspunkte: ${it.hp}$reset") }
         Thread.sleep(2000)
+
+        val heldIstVergiftet =helden.random()
 
         for (zauber in helden) {
             println("$blue${zauber.name} startet seinen Angriff")
@@ -27,12 +28,25 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                     //Angriff auf Lord Voldemort
                     zauber.angriff(lordVoldemort)
                 }
+                //
+                heldIstVergiftet.gift()
             } else {
                 println("${zauber.name} hat 0 Lebenspunkte und kann nicht angreifen.")
             }
+
+
             //hier wird das spielende geprüft
             if (lordVoldemort.hp <= 0 && nagini.hp <= 0) {
-                println("${magenta}Die Zauberer haben gewonnen $reset")
+                println("${magenta} _____    ___    __  __ ____   ______ ____                       __  __ ___     ____   ______ _   __   \n" +
+                        "/__  /   /   |  / / / // __ ) / ____// __ \\                     / / / //   |   / __ ) / ____// | / /   \n" +
+                        "  / /   / /| | / / / // __  |/ __/  / /_/ /                    / /_/ // /| |  / __  |/ __/  /  |/ /    \n" +
+                        " / /__ / ___ |/ /_/ // /_/ // /___ / _, _/                    / __  // ___ | / /_/ // /___ / /|  /     \n" +
+                        "/____//_/  |_|\\____//_____//_____//_/ |_|                    /_/ /_//_/  |_|/_____//_____//_/ |_/      \n" +
+                        "                       ______ ______ _       __ ____   _   __ _   __ ______ _   __                     \n" +
+                        "                      / ____// ____/| |     / // __ \\ / | / // | / // ____// | / /                     \n" +
+                        "                     / / __ / __/   | | /| / // / / //  |/ //  |/ // __/  /  |/ /                      \n" +
+                        "                    / /_/ // /___   | |/ |/ // /_/ // /|  // /|  // /___ / /|  /                       \n" +
+                        "                    \\____//_____/   |__/|__/ \\____//_/ |_//_/ |_//_____//_/ |_/   $reset")
                 gameOver = true
                 break
             } else if (harryPotter.hp <= 0 && ronWesley.hp <= 0 && albusDumbledore.hp <= 0) {
@@ -40,7 +54,17 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                 gameOver = true
                 break
             } else if (lordVoldemort.isDead && nagini.isDead) {
-                println("${magenta}Die Zauberer haben gewonnen!$reset")
+                println("${yellow}_____    ___    __  __ ____   ______ ____                       __  __ ___     ____   ______ _   __   \n" +
+                        "/__  /   /   |  / / / // __ ) / ____// __ \\                     / / / //   |   / __ ) / ____// | / /   \n" +
+                        "  / /   / /| | / / / // __  |/ __/  / /_/ /                    / /_/ // /| |  / __  |/ __/  /  |/ /    \n" +
+                        " / /__ / ___ |/ /_/ // /_/ // /___ / _, _/                    / __  // ___ | / /_/ // /___ / /|  /     \n" +
+                        "/____//_/  |_|\\____//_____//_____//_/ |_|                    /_/ /_//_/  |_|/_____//_____//_/ |_/      \n" +
+                        "                       ______ ______ _       __ ____   _   __ _   __ ______ _   __                     \n" +
+                        "                      / ____// ____/| |     / // __ \\ / | / // | / // ____// | / /                     \n" +
+                        "                     / / __ / __/   | | /| / // / / //  |/ //  |/ // __/  /  |/ /                      \n" +
+                        "                    / /_/ // /___   | |/ |/ // /_/ // /|  // /|  // /___ / /|  /                       \n" +
+                        "                    \\____//_____/   |__/|__/ \\____//_/ |_//_/ |_//_____//_/ |_/                        \n" +
+                        "                                                                                                       $reset")
                 gameOver = true
                 break
             }
@@ -48,7 +72,7 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
 
         }
         //Hier ist der Held der Vergiftet wurden ist der auch das elixier bekommt
-        val heldIstVergiftet =helden.random()
+
 
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
@@ -77,6 +101,8 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
             naginiBonusAttacke = true
 //Zusatz Attacke für voldemort, wenn hp 300 sind
         } else if (lordVoldemort.hp == 300 && !gameOver) {
+
+
 //Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und 300 hp ist als zusatzattacke,
             //wenn sie jemanden beißt dann ist dieser vergiftet und ihm werden 10 % hp abgezogen
             println()
@@ -119,14 +145,13 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
 // Wenn die hp unter oder gleich 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben.
 // Der Heiltrank darf nur einmal pro Runde benutzt werden, und wenn ein Zauberer tot ist, bekommt er keinen mehr. wird mit einer range überprüft
         if (((harryPotter.hp in 1..200) || (ronWesley.hp in 1..200) || (albusDumbledore.hp in 1..200)) && !gameOver) {
-            // Der Beuteltrank wird benutzt und ein zufälliger lebender Zauberer wird ausgewählt mit der Lambdafunktion filter wird überprüft, ob die hp zwischen 1 und 200 liegen
+            // Der Beuteltrank wird benutzt und ein zufälliger lebender Zauberer wird ausgewählt mit der Lambdafunktion filter wird überprüft, ob die hp über 0 ist
             val zaubererMitHeiltrank: Zauberer = helden.filter { it.hp > 0 }.random()
             Thread.sleep(2000)
             println("${yellow}Es wird ein lebender Zauberer ausgewählt, der eine Heilung bekommt: ${zaubererMitHeiltrank.name}$reset")
             zaubererMitHeiltrank.beutelTrank()
             println()
         }
-
 //Wenn Nagini ihre Bonusattacke gemacht (true) hat und Ron Wesley seine hp kleiner 300 und Albus Dumbeldore seine hp kleiner 200 sind, darf Harry Potter seine Spezialattacke ausführen
         if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp > 200) {
             //Überprüft ob Bonusattacke nicht true ist
@@ -217,11 +242,9 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                 albusDumbledore.bonusAttacke = true
             }
         }
-
-
         round++
-
     }
+
     // Spielende ausgeben
     println("Das Spiel ist vorbei!")
 }

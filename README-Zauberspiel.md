@@ -34,7 +34,7 @@ Spezialattacken können nur unter bestimmten Bedingungen ausgeführt werden und 
 Zauberer haben die Fähigkeit, sich von Naginis Gift zu erholen und erhalten permanente Heilung durch magische Elixiere.
 
 
-## 6. Zusatzaufgabe
+## 6. Zusatz
 
 * Lord Voldemort ruft Nagini, wenn seine Lebenspunkte auf 0 fallen. Nagini führt Bonusattacken aus, und die Zauberer müssen geschickt reagieren
 und müssen auch Nagini besiegen
