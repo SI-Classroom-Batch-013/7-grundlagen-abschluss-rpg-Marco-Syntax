@@ -51,8 +51,7 @@ open class Zauberer(
                 println("$name hat ${hp-giftSchaden} Lebenspunkte das Gift zieht ihm 10% ab")
                 hp -= giftSchaden
                 println("$name hat $giftSchaden Lebenspunkte durch das Gift verloren.$reset")
-                isVergiftet = false
-
+                isVergiftet = true
             }
        }
     }

@@ -9,9 +9,9 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
         println("$red------Gegner Team-----$reset")
         gegner.forEach { println("$red Dein Gegner ist ${it.name} und hat Lebenspunkte: ${it.hp}$reset") }
         Thread.sleep(2000)
-
+        //Das ist der Zauberer der vergiftet worden ist
         val heldIstVergiftet =helden.random()
-
+        //For schleife für Angriffe
         for (zauber in helden) {
             println("$blue${zauber.name} startet seinen Angriff")
             // Überprüfen, ob der Zauberer noch Lebenspunkte hat um anzugreifen
@@ -28,12 +28,11 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                     //Angriff auf Lord Voldemort
                     zauber.angriff(lordVoldemort)
                 }
-                //
-                heldIstVergiftet.gift()
+
             } else {
                 println("${zauber.name} hat 0 Lebenspunkte und kann nicht angreifen.")
             }
-
+            heldIstVergiftet.gift()
 
             //hier wird das spielende geprüft
             if (lordVoldemort.hp <= 0 && nagini.hp <= 0) {
@@ -102,8 +101,7 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
 //Zusatz Attacke für voldemort, wenn hp 300 sind
         } else if (lordVoldemort.hp == 300 && !gameOver) {
 
-
-//Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und 300 hp ist als zusatzattacke,
+//Hier wird Nagini angreifen, wenn Lord Voldemort noch lebt und 300 hp ist eine zusatzattacke,
             //wenn sie jemanden beißt dann ist dieser vergiftet und ihm werden 10 % hp abgezogen
             println()
             Thread.sleep(2000)
@@ -139,7 +137,7 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
         if (naginiSchlangenBiss && !gameOver) {
             heldIstVergiftet.elixier()
             //Lambdafunktion verwendet, um den Zugriff auf false zu setzen, bei allen Zauberern
-            helden.map { it.elixierZugriff = false }
+//            helden.map { it.elixierZugriff = false }
         }
 
 // Wenn die hp unter oder gleich 200 ist, wird einem zufälligen Zauber ein Heiltrank gegeben.

@@ -21,7 +21,7 @@ var naginiSchlangenBiss = false
 
 
 fun main() {
-    gameMusik()
+//    gameMusik()
     titelUeberschrift()
     spiel(helden, gegner)
 }
