@@ -1,17 +1,15 @@
-class Nagini (name:String,hp:Int): DunklerZauberer (name, hp) {
+class Nagini (name:String,hp:Int): DarkMage (name, hp) {
 
-    fun schlagenBiss(ziel: Zauberer) {
+    fun applySnakeAttack(target: Wizard) {
         val schlagenBiss = 100
-        if (ziel.hp > 0) {
+        if (target.hp > 0) {
             Thread.sleep(2000)
-            println("$green$name hat Attacke Schlagenbiss gegen ${ziel.name} angewendet. Schaden: $schlagenBiss punkte$reset")
-            ziel.hp -= schlagenBiss
-            println("$green${ziel.name} hat noch ${ziel.hp} lebenspunkte und wurde vergiftet$reset")
-        } else if (ziel.hp == 0) {
-            println("${ziel.name} wurde besiegt")
+            println("$green$name hat Attacke Schlagenbiss gegen ${target.name} angewendet. Schaden: $schlagenBiss punkte$reset")
+            target.hp -= schlagenBiss
+            println("$green${target.name} hat noch ${target.hp} lebenspunkte und wurde vergiftet$reset")
+        } else if (target.hp == 0) {
+            println("${target.name} wurde besiegt")
         }
     }
 
 }
-//var ist vergiftet muss jeder held haben
-//for schleife sind die vergifte dann ziehe immer 10% ab
