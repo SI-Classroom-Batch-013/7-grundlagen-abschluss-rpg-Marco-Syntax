@@ -66,7 +66,7 @@ fun playAudio (audioPath : String) {
     if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
         val volume: FloatControl = clip.getControl(FloatControl.Type.MASTER_GAIN) as FloatControl
 
-        volume.value = volume.minimum+(0.50f*(volume.maximum-volume.minimum))
+        volume.value = volume.minimum+(0.70f*(volume.maximum-volume.minimum))
     } else {
         println("Master Gain Control not Supported")
     }

@@ -1,6 +1,6 @@
 open class DarkMage(var name: String, var hp: Int, var isDead: Boolean = false) {
     //Ist eine Methode die eine Random Attacke ausführt
-    fun mysterySpell(auf: Zauberer) {
+    fun mysterySpell(auf: Wizard) {
         if (auf.hp > 0) {
             val angriffListe = listOf(
                 { fireAttack(auf)},
@@ -13,7 +13,7 @@ open class DarkMage(var name: String, var hp: Int, var isDead: Boolean = false) 
     }
 
     //Eine Attacke die Schaden verursacht
-    private fun fireAttack(ziel: Zauberer) {
+    private fun fireAttack(ziel: Wizard) {
         val fireAttack = 150
         if (ziel.hp > 0) {
             println("$name hat Attacke Feuersturm gegen ${ziel.name} angewendet. Schaden: $fireAttack punkte")
@@ -23,7 +23,7 @@ open class DarkMage(var name: String, var hp: Int, var isDead: Boolean = false) 
     }
 
     //Eine Attacke die Schaden verursacht
-    private fun deathCurse(ziel: Zauberer) {
+    private fun deathCurse(ziel: Wizard) {
         val deathCurse: Int = 150
         if (ziel.hp > 0) {
             println("$name hat Attacke Fluch des Todes gegen ${ziel.name} angewendet. Schaden: $deathCurse punkte")
@@ -43,7 +43,7 @@ open class DarkMage(var name: String, var hp: Int, var isDead: Boolean = false) 
     }
 
     //Eine Attacke die Schaden verursacht
-    private fun darkMagicStrike(ziel: Zauberer) {
+    private fun darkMagicStrike(ziel: Wizard) {
         val darkMagicStrike: Int = 150
         if (ziel.hp > 0) {
             println("$name hat Attacke Dementorenattacke gegen ${ziel.name} angewendet. Schaden: $darkMagicStrike punkte")
@@ -54,7 +54,7 @@ open class DarkMage(var name: String, var hp: Int, var isDead: Boolean = false) 
 
     //Die Attacke greift alle Zauber an und verursacht schaden
     //Attacke fügt allen Zauber schaden zu
-    fun getAreaSpell(ziel1: Zauberer, ziel2: Zauberer, ziel3: Zauberer) {
+    fun getAreaSpell(ziel1: Wizard, ziel2: Wizard, ziel3: Wizard) {
         val areaSpell: Int = 100
         if (ziel1.hp > 0 || ziel2.hp > 0 || ziel3.hp > 0) {
             println("$red$name hat Attacke Flächenzauber angewendet. Schaden: $areaSpell punkte$reset")

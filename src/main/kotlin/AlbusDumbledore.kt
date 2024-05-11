@@ -1,4 +1,4 @@
-open class AlbusDumbledore(name: String, hp: Int, action: Action) : Zauberer(name, hp, Action()) {
+open class AlbusDumbledore(name: String, hp: Int, action: SpellMaster) : Wizard(name, hp, SpellMaster()) {
 
     //Fawkes attacke anwenden
     fun phoenixStrike(ziel: DarkMage) {

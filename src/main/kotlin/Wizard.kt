@@ -1,10 +1,10 @@
 open class Wizard(
     var name: String, var hp: Int, var action: SpellMaster,
-    var protectiveSpellActive: Boolean = false,
-    var elixierZugriff: Boolean = true,
-    var beutelTrank: Boolean = false,
-    var bonusAttacke: Boolean = false,
-    var IsPoisoned: Boolean = false
+    var shieldActive: Boolean = false,
+    var elixirAccess: Boolean = true,
+    var bagPotion: Boolean = false,
+    var attackBonus: Boolean = false,
+    var isPoisoned: Boolean = false
 ) {
 
     open val magicSpells: MutableMap<String, Int> = mutableMapOf(
@@ -45,14 +45,14 @@ open class Wizard(
 
     //Hier wird dem Zauber "das Gift" abgezogen
     open fun inflictPoison() {
-        if (IsPoisoned) {
+        if (isPoisoned) {
             println("$green$name ist vergiftet Aktuelle :$hp")
             if (hp > 0) {
                 val poisonDamage = (hp * 0.1).toInt()
                 println("$name hat ${hp - poisonDamage} Lebenspunkte das Gift zieht ihm 10% ab")
                 hp -= poisonDamage
                 println("$name hat $poisonDamage Lebenspunkte durch das Gift verloren.$reset")
-                IsPoisoned = true
+                isPoisoned = true
             }
         }
     }
@@ -70,7 +70,7 @@ open class Wizard(
     //Gibt dem Zauber Schutz vor der Attacke
     fun protect() {
         val reducedDamage = castSpell()
-        if (protectiveSpellActive) {
+        if (shieldActive) {
             println("$name versucht sich gegen den Angriff zu schützen.")
             if (reducedDamage != null) {
                 hp -= reducedDamage
@@ -97,7 +97,7 @@ open class Wizard(
     //Steht nur einmal zur Verfügung erhöht die Lebenspunkte um 10
     private var elixirCount = 1
     fun useElixir() {
-        if (elixierZugriff) {
+        if (elixirAccess) {
             val healing = 10
             println("${green}Naginis Biss war giftig ")
             println("$green$name bekommt ein Zauberelixier. Seine Energie wird jetzt um 10 hp erhöht.$reset")

@@ -1,51 +1,53 @@
-fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
+fun startBattle(heroes: MutableList<Wizard>, enemy: MutableList<DarkMage>) {
     while (!gameOver) {
         println("         ----Runde:$round----")
         println()
         println("$blue-----Dein Team-----$reset")
-        helden.forEach { println("$blue Der Zauber ${it.name} hat Lebenspunkte: ${it.hp}$reset") }
+        heroes.forEach { println("$blue Der Zauber ${it.name} hat Lebenspunkte: ${it.hp}$reset") }
         println()
         Thread.sleep(2000)
         println("$red------Gegner Team-----$reset")
-        gegner.forEach { println("$red Dein Gegner ist ${it.name} und hat Lebenspunkte: ${it.hp}$reset") }
+        enemy.forEach { println("$red Dein Gegner ist ${it.name} und hat Lebenspunkte: ${it.hp}$reset") }
         Thread.sleep(2000)
         //Das ist der Zauberer der vergiftet worden ist
-        val heldIstVergiftet =helden.random()
+        val heroIsPoisoned = heroes.random()
         //For schleife für Angriffe
-        for (zauber in helden) {
-            println("$blue${zauber.name} startet seinen Angriff")
+        for (hero in heroes) {
+            println("$blue${hero.name} startet seinen Angriff")
             // Überprüfen, ob der Zauberer noch Lebenspunkte hat um anzugreifen
-            if (zauber.hp > 0) {
+            if (hero.hp > 0) {
 // Wenn Lord Voldemort besiegt wurde, dann Nagini angreifen
                 if (lordVoldemort.hp == 0 && nagini.hp > 0 && !nagini.isDead) {
                     println("${nagini.name} wird jetzt angegriffen")
-                    zauber.angriff(nagini)
+                    hero.attack(nagini)
                     if (nagini.hp == 0) {
                         nagini.isDead = true
                         gameOver = true
                     }
                 } else {
                     //Angriff auf Lord Voldemort
-                    zauber.angriff(lordVoldemort)
+                    hero.attack(lordVoldemort)
                 }
 
             } else {
-                println("${zauber.name} hat 0 Lebenspunkte und kann nicht angreifen.")
+                println("${hero.name} hat 0 Lebenspunkte und kann nicht angreifen.")
             }
-            heldIstVergiftet.gift()
+            heroIsPoisoned.inflictPoison()
 
             //hier wird das spielende geprüft
             if (lordVoldemort.hp <= 0 && nagini.hp <= 0) {
-                println("${magenta} _____    ___    __  __ ____   ______ ____                       __  __ ___     ____   ______ _   __   \n" +
-                        "/__  /   /   |  / / / // __ ) / ____// __ \\                     / / / //   |   / __ ) / ____// | / /   \n" +
-                        "  / /   / /| | / / / // __  |/ __/  / /_/ /                    / /_/ // /| |  / __  |/ __/  /  |/ /    \n" +
-                        " / /__ / ___ |/ /_/ // /_/ // /___ / _, _/                    / __  // ___ | / /_/ // /___ / /|  /     \n" +
-                        "/____//_/  |_|\\____//_____//_____//_/ |_|                    /_/ /_//_/  |_|/_____//_____//_/ |_/      \n" +
-                        "                       ______ ______ _       __ ____   _   __ _   __ ______ _   __                     \n" +
-                        "                      / ____// ____/| |     / // __ \\ / | / // | / // ____// | / /                     \n" +
-                        "                     / / __ / __/   | | /| / // / / //  |/ //  |/ // __/  /  |/ /                      \n" +
-                        "                    / /_/ // /___   | |/ |/ // /_/ // /|  // /|  // /___ / /|  /                       \n" +
-                        "                    \\____//_____/   |__/|__/ \\____//_/ |_//_/ |_//_____//_/ |_/   $reset")
+                println(
+                    "${magenta} _____    ___    __  __ ____   ______ ____                       __  __ ___     ____   ______ _   __   \n" +
+                            "/__  /   /   |  / / / // __ ) / ____// __ \\                     / / / //   |   / __ ) / ____// | / /   \n" +
+                            "  / /   / /| | / / / // __  |/ __/  / /_/ /                    / /_/ // /| |  / __  |/ __/  /  |/ /    \n" +
+                            " / /__ / ___ |/ /_/ // /_/ // /___ / _, _/                    / __  // ___ | / /_/ // /___ / /|  /     \n" +
+                            "/____//_/  |_|\\____//_____//_____//_/ |_|                    /_/ /_//_/  |_|/_____//_____//_/ |_/      \n" +
+                            "                       ______ ______ _       __ ____   _   __ _   __ ______ _   __                     \n" +
+                            "                      / ____// ____/| |     / // __ \\ / | / // | / // ____// | / /                     \n" +
+                            "                     / / __ / __/   | | /| / // / / //  |/ //  |/ // __/  /  |/ /                      \n" +
+                            "                    / /_/ // /___   | |/ |/ // /_/ // /|  // /|  // /___ / /|  /                       \n" +
+                            "                    \\____//_____/   |__/|__/ \\____//_/ |_//_/ |_//_____//_/ |_/   $reset"
+                )
                 gameOver = true
                 break
             } else if (harryPotter.hp <= 0 && ronWesley.hp <= 0 && albusDumbledore.hp <= 0) {
@@ -53,40 +55,39 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                 gameOver = true
                 break
             } else if (lordVoldemort.isDead && nagini.isDead) {
-                println("${yellow}_____    ___    __  __ ____   ______ ____                       __  __ ___     ____   ______ _   __   \n" +
-                        "/__  /   /   |  / / / // __ ) / ____// __ \\                     / / / //   |   / __ ) / ____// | / /   \n" +
-                        "  / /   / /| | / / / // __  |/ __/  / /_/ /                    / /_/ // /| |  / __  |/ __/  /  |/ /    \n" +
-                        " / /__ / ___ |/ /_/ // /_/ // /___ / _, _/                    / __  // ___ | / /_/ // /___ / /|  /     \n" +
-                        "/____//_/  |_|\\____//_____//_____//_/ |_|                    /_/ /_//_/  |_|/_____//_____//_/ |_/      \n" +
-                        "                       ______ ______ _       __ ____   _   __ _   __ ______ _   __                     \n" +
-                        "                      / ____// ____/| |     / // __ \\ / | / // | / // ____// | / /                     \n" +
-                        "                     / / __ / __/   | | /| / // / / //  |/ //  |/ // __/  /  |/ /                      \n" +
-                        "                    / /_/ // /___   | |/ |/ // /_/ // /|  // /|  // /___ / /|  /                       \n" +
-                        "                    \\____//_____/   |__/|__/ \\____//_/ |_//_/ |_//_____//_/ |_/                        \n" +
-                        "                                                                                                       $reset")
+                println(
+                    "${yellow}_____    ___    __  __ ____   ______ ____                       __  __ ___     ____   ______ _   __   \n" +
+                            "/__  /   /   |  / / / // __ ) / ____// __ \\                     / / / //   |   / __ ) / ____// | / /   \n" +
+                            "  / /   / /| | / / / // __  |/ __/  / /_/ /                    / /_/ // /| |  / __  |/ __/  /  |/ /    \n" +
+                            " / /__ / ___ |/ /_/ // /_/ // /___ / _, _/                    / __  // ___ | / /_/ // /___ / /|  /     \n" +
+                            "/____//_/  |_|\\____//_____//_____//_/ |_|                    /_/ /_//_/  |_|/_____//_____//_/ |_/      \n" +
+                            "                       ______ ______ _       __ ____   _   __ _   __ ______ _   __                     \n" +
+                            "                      / ____// ____/| |     / // __ \\ / | / // | / // ____// | / /                     \n" +
+                            "                     / / __ / __/   | | /| / // / / //  |/ //  |/ // __/  /  |/ /                      \n" +
+                            "                    / /_/ // /___   | |/ |/ // /_/ // /|  // /|  // /___ / /|  /                       \n" +
+                            "                    \\____//_____/   |__/|__/ \\____//_/ |_//_/ |_//_____//_/ |_/                        \n" +
+                            "                                                                                                       $reset"
+                )
                 gameOver = true
                 break
             }
 
-
         }
-        //Hier ist der Held der Vergiftet wurden ist der auch das elixier bekommt
-
-
+        //Hier ist der Held der Vergiftet wurden ist der auch das elixier bekommen
 //Überprüfen, ob Lord Voldemort noch Lebenspunkte hat und Angriff ausführen kann Random Angriff ausführen
         if (lordVoldemort.hp > 0) {
             println()
             println("$red${lordVoldemort.name} startet seinen Angriff")
-            lordVoldemort.randomAngriff(helden.random())
+            lordVoldemort.mysterySpell(heroes.random())
 // Wenn Lord Voldemort keine hp mehr hat, dann greift nagini an
         } else if (lordVoldemort.hp == 0 && nagini.hp > 0) {
             lordVoldemort.isDead = true
-            nagini.randomAngriff(helden.random())
+            nagini.mysterySpell(heroes.random())
         } else if (nagini.hp <= 0) {
             nagini.isDead = true
         }
 //Wenn Lord Voldemort gestorben ist, ruft er Nagini zur Hilfe und Nagini führt FlächenZauber aus (Bonusattacke) aus die sie einmal ausführt
-        if (lordVoldemort.hp <= 0 && !naginiBonusAttacke) {
+        if (lordVoldemort.hp <= 0 && !naginiBonusAttack) {
             println()
             lordVoldemort.isDead = true
             Thread.sleep(2000)
@@ -94,10 +95,10 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
             println("$red Nagini taucht auf  führt eine Bonusattacke (Flächenzauber) aus die alle Zauberer verletzt.$reset")
             println()
 //Nagini führt ein Flächenzauber aus und fügt allen Zauberern Schaden zu
-            nagini.flächenZauber(harryPotter, ronWesley, albusDumbledore)
+            nagini.getAreaSpell(harryPotter, ronWesley, albusDumbledore)
             Thread.sleep(2000)
             println()
-            naginiBonusAttacke = true
+            naginiBonusAttack = true
 //Zusatz Attacke für voldemort, wenn hp 300 sind
         } else if (lordVoldemort.hp == 300 && !gameOver) {
 
@@ -107,35 +108,37 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
             Thread.sleep(2000)
             println("${lordVoldemort.name} wurde schwer Verletzt und ruft Nagini zur Hilfe. Sie beißt zu!")
 
-                nagini.schlagenBiss(heldIstVergiftet)
+            nagini.applySnakeAttack(heroIsPoisoned)
 
-            println("$green           /^\\/^\\\n" +
-                    "         _|__|  O|\n" +
-                    "\\/     /~     \\_/ \\\n" +
-                    " \\____|__________/  \\\n" +
-                    "        \\_______      \\\n" +
-                    "                `\\     \\                 \\\n" +
-                    "                  |     |                  \\\n" +
-                    "                 /      /                    \\\n" +
-                    "                /     /                       \\\\\n" +
-                    "              /      /                         \\ \\\n" +
-                    "             /     /                            \\  \\\n" +
-                    "           /     /             _----_            \\   \\\n" +
-                    "          /     /           _-~      ~-_         |   |\n" +
-                    "         (      (        _-~    _--_    ~-_     _/   |\n" +
-                    "          \\      ~-____-~    _-~    ~-_    ~-_-~    /\n" +
-                    "            ~-_           _-~          ~-_       _-~\n" +
-                    "               ~--______-~                ~-___-~\n$reset")
-            naginiSchlangenBiss = true
+            println(
+                "$green           /^\\/^\\\n" +
+                        "         _|__|  O|\n" +
+                        "\\/     /~     \\_/ \\\n" +
+                        " \\____|__________/  \\\n" +
+                        "        \\_______      \\\n" +
+                        "                `\\     \\                 \\\n" +
+                        "                  |     |                  \\\n" +
+                        "                 /      /                    \\\n" +
+                        "                /     /                       \\\\\n" +
+                        "              /      /                         \\ \\\n" +
+                        "             /     /                            \\  \\\n" +
+                        "           /     /             _----_            \\   \\\n" +
+                        "          /     /           _-~      ~-_         |   |\n" +
+                        "         (      (        _-~    _--_    ~-_     _/   |\n" +
+                        "          \\      ~-____-~    _-~    ~-_    ~-_-~    /\n" +
+                        "            ~-_           _-~          ~-_       _-~\n" +
+                        "               ~--______-~                ~-___-~\n$reset"
+            )
+            naginiSnakeBite = true
             println()
             Thread.sleep(1000)
-            heldIstVergiftet.isVergiftet =true
-            heldIstVergiftet.gift()
+            heroIsPoisoned.isPoisoned = true
+            heroIsPoisoned.inflictPoison()
 
         }
         //Wenn der Schlagenbiss true ist, dann wird ein Magisches elixier aufgerufen und der vergiftet Zauber bekommt das elixier und die hp wird um 10 erhöht
-        if (naginiSchlangenBiss && !gameOver) {
-            heldIstVergiftet.elixier()
+        if (naginiSnakeBite && !gameOver) {
+            heroIsPoisoned.useElixir()
             //Lambdafunktion verwendet, um den Zugriff auf false zu setzen, bei allen Zauberern
 //            helden.map { it.elixierZugriff = false }
         }
@@ -144,16 +147,16 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
 // Der Heiltrank darf nur einmal pro Runde benutzt werden, und wenn ein Zauberer tot ist, bekommt er keinen mehr. wird mit einer range überprüft
         if (((harryPotter.hp in 1..200) || (ronWesley.hp in 1..200) || (albusDumbledore.hp in 1..200)) && !gameOver) {
             // Der Beuteltrank wird benutzt und ein zufälliger lebender Zauberer wird ausgewählt mit der Lambdafunktion filter wird überprüft, ob die hp über 0 ist
-            val zaubererMitHeiltrank: Zauberer = helden.filter { it.hp > 0 }.random()
+            val zaubererMitHeiltrank: Wizard = heroes.filter { it.hp > 0 }.random()
             Thread.sleep(2000)
             println("${yellow}Es wird ein lebender Zauberer ausgewählt, der eine Heilung bekommt: ${zaubererMitHeiltrank.name}$reset")
-            zaubererMitHeiltrank.beutelTrank()
+            zaubererMitHeiltrank.bagPotion()
             println()
         }
 //Wenn Nagini ihre Bonusattacke gemacht (true) hat und Ron Wesley seine hp kleiner 300 und Albus Dumbeldore seine hp kleiner 200 sind, darf Harry Potter seine Spezialattacke ausführen
-        if (naginiBonusAttacke && nagini.hp > 0 && harryPotter.hp > 200) {
+        if (naginiBonusAttack && nagini.hp > 0 && harryPotter.hp > 200) {
             //Überprüft ob Bonusattacke nicht true ist
-            if (!harryPotter.bonusAttacke) {
+            if (!harryPotter.attackBonus) {
                 Thread.sleep(2000)
                 println("$yellow${harryPotter.name} darf jetzt seine Spezialattacke Fliegen benutzen")
                 println(
@@ -175,14 +178,14 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                             "                  ) `{\n" +
                             "                  \\__)"
                 )
-                harryPotter.fliegen(nagini)
-                harryPotter.bonusAttacke = true
+                harryPotter.broomAttack(nagini)
+                harryPotter.attackBonus = true
                 println()
                 Thread.sleep(2000)
             }
             //Wenn Harry Potter seine hp kleiner 300 und Albus Dumbledore hp kleiner 300 sind, darf Ron Wesley seine Spezialattacke ausführen
-        } else if (naginiBonusAttacke && nagini.hp > 0 && ronWesley.hp > 200) {
-            if (!ronWesley.bonusAttacke) {
+        } else if (naginiBonusAttack && nagini.hp > 0 && ronWesley.hp > 200) {
+            if (!ronWesley.attackBonus) {
                 println()
                 Thread.sleep(2000)
                 println("$yellow Ron Wesley darf seine Spezialattacke anwenden und ruf seine Ratte Krätze")
@@ -192,13 +195,13 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                             "    .',  ||||    `/( e\\\n" +
                             "-==~-'`-Xm````-mm-' `-_\\"
                 )
-                ronWesley.ratteKrätze(nagini)
+                ronWesley.ratAttack(nagini)
                 Thread.sleep(2000)
-                ronWesley.bonusAttacke = true
+                ronWesley.attackBonus = true
             }
             //Wenn Harry Potter seine hp kleiner 200 und Ron Wesley hp kleiner 200 sind, darf Albus Dumbledore seine Spezialattacke ausführen
-        } else if (naginiBonusAttacke && nagini.hp > 0 && albusDumbledore.hp > 200) {
-            if (!albusDumbledore.bonusAttacke) {
+        } else if (naginiBonusAttack && nagini.hp > 0 && albusDumbledore.hp > 200) {
+            if (!albusDumbledore.attackBonus) {
                 println()
                 Thread.sleep(2000)
                 println("$yellow Albus Dumbledore darf seine Spezialattacke anwenden und ruf seinen Phönix Fakes")
@@ -235,9 +238,9 @@ fun spiel(helden: MutableList<Zauberer>, gegner:MutableList<DunklerZauberer>){
                             "               (_/  /   | | j-\"          ~^\n" +
                             "                 ~-<_(_.^-~\"               "
                 )
-                albusDumbledore.fawkesAttacke(nagini)
+                albusDumbledore.phoenixStrike(nagini)
                 Thread.sleep(2000)
-                albusDumbledore.bonusAttacke = true
+                albusDumbledore.attackBonus = true
             }
         }
         round++
